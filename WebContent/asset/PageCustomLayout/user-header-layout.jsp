@@ -313,3 +313,17 @@
 
         </nav>
         <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+      	<div class="container-fluid">
+
+		<!-- Page Heading -->
+	       <div class="d-sm-flex align-items-center justify-content-between mb-4">
+	       	 <% String pageHeading = request.getParameter("pageHeading"); %>
+	         <h1 class="h3 mb-0 text-gray-800"><%=pageHeading %></h1>
+	         <a href="<%=request.getContextPath()%>/LogoutServlet" class="btn btn-secondary btn-icon-split">
+	           <span class="icon text-gray-600">
+	             <i class="fas fa-sign-out-alt"></i>
+	           </span>
+	           <span class="text">Logout User</span>
+	         </a>
+	       </div>
