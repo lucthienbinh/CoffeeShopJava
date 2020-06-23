@@ -1,14 +1,8 @@
 
 package coffeeshop.dbconnection;
 
-import com.sun.xml.rpc.processor.generator.ServletConfigGenerator;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import javax.naming.InitialContext;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.sql.DataSource;
-
 
 public class DBConnectionService {
 

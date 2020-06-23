@@ -64,7 +64,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Employee Action List:</h6>
             <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchUserServlet">Employee List</a>
-            <a class="collapse-item" href="">Create Employee</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateUserServlet">Create Employee</a>
           </div>
         </div>
       </li>
@@ -78,8 +78,8 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Customer Action List:</h6>
-            <a class="collapse-item" href="">Customer List</a>
-            <a class="collapse-item" href="">Create Customer</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchCustomerServlet">Customer List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateCustomerServlet">Create Customer</a>
           </div>
         </div>
       </li>
@@ -102,7 +102,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Menu Action List:</h6>
             <a class="collapse-item" href="">Menu List</a>
-            <a class="collapse-item" href="">Create Menu</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateOrderMenuServlet">Create Menu</a>
           </div>
         </div>
       </li>
@@ -116,7 +116,7 @@
         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Material Action List:</h6>
-            <a class="collapse-item" href="">Material List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchMaterialServlet">Material List</a>
             <a class="collapse-item" href="">Create Material</a>
           </div>
         </div>

@@ -113,22 +113,23 @@ public class UserBO {
 	    	userMapper = new UserMapper();
 	    	UserDTO user = userMapper.getUser(currentEmail);
 	    	if (user != null) {
-	    		//store user information to usersSelected
+	    		// if user delete list is empty
 		        if (userDeleteList == null) {
 		        	userNewArray.add(user);
 		        } else {
-		            //if User name is exist or not 
+		            //if email is exist or not 
 		            boolean usernameExisted = false;
 		            for (int i = 0; i < userDeleteList.size(); i++) {
 		            	UserDTO getUser = userDeleteList.get(i);
 		                if (getUser.getEmail().equals(currentEmail)) {
 		                	usernameExisted = true;
+		                	// continue to not add user to new array ~ delete user in delete list
 		                	continue;
 		                }
 		                userNewArray.add(getUser);
 		            }
 		
-		            //if User name isn't exist
+		            //if email isn't exist
 		            if (usernameExisted == false) {
 		            	userNewArray.add(user);
 		            }

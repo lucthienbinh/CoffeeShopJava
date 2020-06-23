@@ -1,11 +1,11 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@page import="coffeeshop.dto.UserDTO"%>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@page import="coffeeshop.dto.CustomerDTO"%>
 <%@page import="java.util.ArrayList" %>
 <jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
-<jsp:param name="pageTitle" value="Employee User Page"/>
-<jsp:param name="pageHeading" value="Employee User List"/>
+<jsp:param name="pageTitle" value="Customer User Page"/>
+<jsp:param name="pageHeading" value="Customer User List"/>
 </jsp:include>
-
+        
 <!-- ###################### START TO INPUT YOUR CODE FROM HERE ###################### -->
 <!-- Begin Page Content -->
 		<!-- Alert information -->
@@ -23,55 +23,40 @@
            <div class="card shadow mb-4">
              <!-- Card Header - Dropdown -->
              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-               <h6 class="m-0 font-weight-bold text-primary">Search User Information</h6>
+               <h6 class="m-0 font-weight-bold text-primary">Search Customer Information</h6>
              </div>
              <!-- Card Body -->
              <div class="card-body">
-                <form method="get" action="SearchUserServlet" id="searchUserForm">
+                <form method="get" action="SearchCustomerServlet" id="searchUserForm">
     		<% 
-    			UserDTO userSearchInfo = (UserDTO) session.getAttribute("userSearchInfo");
+    			CustomerDTO customerSearchInfo = (CustomerDTO) session.getAttribute("customerSearchInfo");
     		%>
+    		
+    		<div class="row">
+    			<div class="col-md-12">
+    				<input type="text" class="form-control bg-light border-0 small" placeholder="Customer name" 
+    				name="name" value="<%=customerSearchInfo.getName() %>" aria-describedby="basic-addon2">
+    			</div>
+    		</div>
+    		<br>
     		<div class="row">
     			<div class="col-md-12">
     				<input type="text" class="form-control bg-light border-0 small" placeholder="Email" 
-    				name="email" value="<%=userSearchInfo.getEmail() %>" aria-describedby="basic-addon2">
+    				name="email" value="<%=customerSearchInfo.getEmail() %>" aria-describedby="basic-addon2">
     			</div>
     		</div>
     		<br>
     		<div class="row">
-    			<div class="col-md-6">
-    				<input type="text" class="form-control bg-light border-0 small" placeholder="First name" 
-    				name="firstname" value="<%=userSearchInfo.getFirstname() %>" aria-describedby="basic-addon2">
-    			</div>
-    			<div class="col-md-6">
-    				<input type="text" class="form-control bg-light border-0 small" placeholder="Last name" 
-    				name="lastname" value="<%=userSearchInfo.getLastname() %>" aria-describedby="basic-addon2">
-    			</div>
-    		</div>
-    		<br>
-    		<div class="row">
-    			<div class="col-md-6">
-    				<input type="text" class="form-control bg-light border-0 small" placeholder="Sex" 
-    				name="sex" value="<%=userSearchInfo.getSex() %>" aria-describedby="basic-addon2">
-    			</div>
-    			<div class="col-md-6">
+    			<div class="col-md-12">
     				<input type="text" class="form-control bg-light border-0 small" placeholder="Address" 
-    				name="address" value="<%=userSearchInfo.getAddress() %>" aria-describedby="basic-addon2">
+    				name="address" value="<%=customerSearchInfo.getAddress() %>" aria-describedby="basic-addon2">
     			</div>
     		</div>
     		<br>
     		<div class="row">
-    			<div class="col-md-6">
+    			<div class="col-md-12">
     				<input type="text" class="form-control bg-light border-0 small" placeholder="Mobile phone" 
-    				name="mobilephone" value="<%=userSearchInfo.getMobilephone() %>" aria-describedby="basic-addon2">
-    			</div>
-    			<div class="col-md-6">
-    				<select name="groupid" class="form-control bg-light border-0 small">
-                    <option value="0" selected>All</option>
-                    <option value="1">Admin</option>
-                    <option value="2">User</option>
-                    <option value="3">Customer</option>
-                </select>
+    				name="mobilephone" value="<%=customerSearchInfo.getMobilephone() %>" aria-describedby="basic-addon2">
     			</div>
     		</div>
     		<br>
@@ -95,25 +80,25 @@
                    <span class="icon text-white-50">
                     	<i class="fas fa-search"></i>
                    </span>
-                   <span class="text btn-text-action-list">Search User</span>
+                   <span class="text btn-text-action-list">Search Customer</span>
                 	</button>
                 </div>
                 <br>
                 <div>
-                	<a href="<%=request.getContextPath()%>/GoCreateUserServlet" class="btn btn-success btn-icon-split">
+                	<a href="<%=request.getContextPath()%>/GoCreateCustomerServlet" class="btn btn-success btn-icon-split">
                    <span class="icon text-white-50">
                      <i class="fas fa-check"></i>
                    </span>
-                   <span class="text btn-text-action-list">Create User</span>
+                   <span class="text btn-text-action-list">Create Customer</span>
                 	</a>
                 </div>
                 <br>
                	  <div>
-               	  	<a href="<%=request.getContextPath()%>/DeleteUserServlet" class="btn btn-danger btn-icon-split">
+               	  	<a href="<%=request.getContextPath()%>/DeleteCustomerServlet" class="btn btn-danger btn-icon-split">
                    <span class="icon text-white-50">
                      <i class="fas fa-trash"></i>
                    </span>
-                   <span class="text btn-text-action-list">Delete User</span>
+                   <span class="text btn-text-action-list">Delete Customer</span>
                 	</a>
                	  </div>
                	  <br>
@@ -141,55 +126,49 @@
              <table class="table" id="dataTable" width="100%" cellspacing="0">
                <thead>
                  <tr>
+                 	<th>Customer name</th>
                    <th>Email</th>
-                   <th>First name</th>
-                   <th>Last name</th>
-                   <th>Sex</th>
                    <th>Address</th>
                    <th>Mobile-phone</th>
-                   <th>Role name</th>
                    <th>Select</th>
                  </tr>
                </thead>
                <tbody>
            <% 
-          	ArrayList<UserDTO> userDeleteList = (ArrayList) session.getAttribute("userDeleteList");
-          	ArrayList<UserDTO> users = (ArrayList<UserDTO>) request.getAttribute("users"); 
-           	for (int i = 0; i < users.size(); i++) {
-            	UserDTO getUser = users.get(i); %>
+            ArrayList<CustomerDTO> customerDeleteList = (ArrayList) session.getAttribute("customerDeleteList");
+          	ArrayList<CustomerDTO> customers = (ArrayList<CustomerDTO>) request.getAttribute("customers"); 
+           	for (int i = 0; i < customers.size(); i++) {
+           		CustomerDTO getCustomer = customers.get(i); %>
             	<tr>
-            	<td><a href="<%=request.getContextPath()%>/ViewUserServlet?email=<%=getUser.getEmail()%>"><%=getUser.getEmail()%></a></td>
-            	<td><%=getUser.getFirstname()%></td>
-            	<td><%=getUser.getLastname()%></td>
-            	<td><%=getUser.getSex()%></td>
-            	<td><%=getUser.getAddress()%></td>
-            	<td><%=getUser.getMobilephone()%></td>
-            	<td><%=getUser.getGroupname()%></td>
+            	<td><a href="<%=request.getContextPath()%>/ViewCustomerServlet?email=<%=getCustomer.getEmail()%>"><%=getCustomer.getName()%></a></td>
+            	<td><%=getCustomer.getEmail()%></td>
+            	<td><%=getCustomer.getAddress()%></td>
+            	<td><%=getCustomer.getMobilephone()%></td>
             	<%
-            		boolean checkUsername = false;
-                      	if (userDeleteList != null)
+            		boolean emailExisted = false;
+                      	if (customerDeleteList != null)
                       	{
-                      		for (int j = 0; j < userDeleteList.size(); j++) {
-          		            	UserDTO newUser = userDeleteList.get(j);
-          		                if (newUser.getId() == getUser.getId()) {
-          		                	checkUsername = true;
+                      		for (int j = 0; j < customerDeleteList.size(); j++) {
+                      			CustomerDTO newUser = customerDeleteList.get(j);
+          		                if (newUser.getId() == getCustomer.getId()) {
+          		                	emailExisted = true;
           		                    break;
           		                }
           		            }%>
           		            	<td><input type="checkbox" name="selectAndUpdate" 
           		            	<%
-           		            	if (checkUsername == true)
+           		            	if (emailExisted == true)
                         		{
            		            		out.print("checked");
                         		}
           		            	%>
-                           		onclick='window.location.assign("UpdateUserDeleteList?email=<%=getUser.getEmail()%>")'/></td> 
+                           		onclick='window.location.assign("UpdateCustomerDeleteList?email=<%=getCustomer.getEmail()%>")'/></td> 
                            		
                       	<%}
                       	else {%>
                       		<td>
                        		<input type="checkbox" name="selectAndUpdate" 
-                           		onclick='window.location.assign("UpdateUserDeleteList?email=<%=getUser.getEmail()%>")'/>
+                           		onclick='window.location.assign("UpdateCustomerDeleteList?email=<%=getCustomer.getEmail()%>")'/>
 						</td> 
 						</tr>
                       	<%}
