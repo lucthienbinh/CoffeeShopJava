@@ -6,7 +6,7 @@
 </jsp:include>
 
 <!-- ###################### START TO INPUT YOUR CODE FROM HERE ###################### -->
-<a href="<%=request.getContextPath()%>/ViewMaterialServlet?name=Banana">View/Edit example material</a>
+<a href="<%=request.getContextPath()%>/ViewMaterialServlet?name=Trai Cam">View/Edit example material</a>
 <!-- ###################### END OF YOUR CODE ###################### -->
 
 <jsp:include page="/asset/PageCustomLayout/footer-layout.jsp"></jsp:include>
