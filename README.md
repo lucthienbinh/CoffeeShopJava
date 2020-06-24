@@ -17,7 +17,7 @@ This project is converted to Java base on a Laravel project. If you find any iss
 - Servlet Technology
 - EJB Technology
 ## How to run the project:
-1. Import file caphe_java_db.sql after create database named caphe_java_db
+1. Import file caphe_java_db.sql after created database named caphe_java_db
 2. Import project folder to your Eclipse workspace
 3. Login to website with 2 accounts
 - Admin account: Email: admin@gmail.com Pass: 123456
