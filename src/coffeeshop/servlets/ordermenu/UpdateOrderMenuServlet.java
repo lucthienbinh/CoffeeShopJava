@@ -28,13 +28,6 @@ public class UpdateOrderMenuServlet extends HttpServlet {
 		}
 		return stringCheck.trim();
     }
-    
-    // private int validateInteger(String integerCheck){
-	// 	if(integerCheck == null) {
-	// 		return 0;
-	// 	}
-	// 	return Integer.parseInt(integerCheck);
-	// }
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -49,13 +42,6 @@ public class UpdateOrderMenuServlet extends HttpServlet {
         }        
         OrderMenuDTO orderMenu = new OrderMenuDTO();
 		boolean updateResult = false;
-
-		String a,b;
-		String c;
-
-		a = request.getParameter("id");
-		b = request.getParameter("name");
-		c = request.getParameter("price");
 
         orderMenu.setId(Integer.parseInt(this.validateString(request.getParameter("id"))));
 		orderMenu.setName(this.validateString(request.getParameter("name")));

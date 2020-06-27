@@ -50,7 +50,7 @@ public class GoSearchOrderMenuServlet extends HttpServlet {
 		session.setAttribute("orderMenuSearchInfo", newEmptyOrderMenuInfo);
 
 		// Get orderMenu info
-        ArrayList<OrderMenuDTO> orderMenus = orderMenuBO.searchOrderMenu(null);
+        ArrayList<OrderMenuDTO> orderMenus = OrderMenuBO.searchOrderMenu(null);
         request.setAttribute("orderMenus", orderMenus);
         RequestDispatcher dispatcher 
                 = request.getRequestDispatcher

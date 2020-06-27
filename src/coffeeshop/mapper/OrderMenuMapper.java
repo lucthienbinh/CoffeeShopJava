@@ -46,7 +46,8 @@ public class OrderMenuMapper extends DBMapper{
             }
         }catch(SQLException ex){
             ex.printStackTrace();
-        } 
+		} 
+		
         return orderMenu;
 	}
 
@@ -62,19 +63,9 @@ public class OrderMenuMapper extends DBMapper{
 				 sqlStr = "SELECT id, name, price FROM ordermenus WHERE 1"
 					+ " ORDER BY id ASC ";
 			}else{
-				// sqlStr = "SELECT ordermenus.id, ordermenus.firstname, ordermenus.lastname, ordermenus.sex,"
-				// 	+ " ordermenus.address, ordermenus.email, ordermenus.mobilephone, ordermenus.groupid, orderMenugroup.groupname"
-				// 	+ " FROM caphe_java_db.ordermenus, caphe_java_db.orderMenugroup"
-				// 	+ " WHERE ordermenus.groupid = orderMenugroup.groupid"
-				// 	+ " AND ordermenus.firstname LIKE '%" + orderMenuInfo.getFirstname() + "%'"
-				// 	+ " AND ordermenus.lastname LIKE '%" + orderMenuInfo.getLastname() + "%'"
-				// 	+ " AND ordermenus.sex LIKE '%" + orderMenuInfo.getSex() + "%'"
-				// 	+ " AND ordermenus.address LIKE '%" + orderMenuInfo.getAddress() + "%'"
-				// 	+ " AND ordermenus.email LIKE '%" + orderMenuInfo.getEmail()+ "%'"
-				// 	+ " AND ordermenus.mobilephone LIKE '%" + orderMenuInfo.getMobilephone()+ "%'";
-				// if (orderMenuInfo.getGroupid() != 0)
-				// 	sqlStr += " AND ordermenus.groupid LIKE '%" + orderMenuInfo.getGroupid()+ "%'";
-				// sqlStr += " ORDER BY ordermenus.id ASC ";
+				sqlStr = "SELECT id, name, price FROM ordermenus"
+					+ " WHERE name LIKE '%" + orderMenuInfo.getName() + "%'"
+					+ " ORDER BY name ASC ";
 			}
 
 			ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server

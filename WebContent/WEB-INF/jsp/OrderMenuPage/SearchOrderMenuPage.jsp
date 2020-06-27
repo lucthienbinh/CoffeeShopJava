@@ -39,10 +39,11 @@
                             <% 
                                 OrderMenuDTO orderMenuSearchInfo = (OrderMenuDTO) session.getAttribute("orderMenuSearchInfo");
                             %>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="text" class="form-control bg-light border-0 small" placeholder="Name" 
-                                    name="name" value="<%=orderMenuSearchInfo.getName() %>" aria-describedby="basic-addon2">
+                                    name="name" value="<%=orderMenuSearchInfo.getName()%>" aria-describedby="basic-addon2">
                                 </div>
                             </div>
                             <br>

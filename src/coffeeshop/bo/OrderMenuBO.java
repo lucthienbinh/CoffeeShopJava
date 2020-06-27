@@ -52,7 +52,7 @@ public class OrderMenuBO {
         return orderMenu;
     }
     
-    public ArrayList<OrderMenuDTO> searchOrderMenu(OrderMenuDTO orderMenu) {
+    public static ArrayList<OrderMenuDTO> searchOrderMenu(OrderMenuDTO orderMenu) {
         ArrayList<OrderMenuDTO> orderMenus = null;
         OrderMenuMapper mapper = null;
         
