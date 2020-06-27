@@ -46,14 +46,6 @@
                                 </div>
                             </div>
                             <br>
-
-                            <!-- <div class="row">
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control bg-light border-0 small" placeholder="Price" 
-                                    name="price" value="<%=orderMenuSearchInfo.getPrice() %>" aria-describedby="basic-addon2">
-                                </div>
-                            </div>
-                            <br> -->
                         </form>
                     </div>
                 </div>
@@ -129,7 +121,7 @@
                         for (int i = 0; i < orderMenus.size(); i++) {
                             OrderMenuDTO getOrderMenu = orderMenus.get(i); %>
                             <tr>
-                            <td><%=getOrderMenu.getName()%></td>
+                            <td><a href="<%=request.getContextPath()%>/ViewOrderMenuServlet?id=<%=getOrderMenu.getId()%>"><%=getOrderMenu.getName()%></a></td>
                             <td><%=getOrderMenu.getPrice()%></td>
                             <%
                                 boolean checkOrderMenuname = false;

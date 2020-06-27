@@ -20,7 +20,7 @@ public class OrderMenuMapper extends DBMapper{
 		 
 		try{
 			 stmt = getConnection().createStatement();
-		     String sqlStr = "INSERT INTO caphe_java_db.ordermenu (`name`, `price`) VALUES ('"
+		     String sqlStr = "INSERT INTO caphe_java_db.ordermenus (`name`, `price`) VALUES ('"
 		    		 + orderMenu.getName() + "','"
 		    		 + orderMenu.getPrice() + "')";
 		     createResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
@@ -30,20 +30,20 @@ public class OrderMenuMapper extends DBMapper{
 		return createResult;
 	}
 	
-	public OrderMenuDTO getOrderMenu(String name){
+	public OrderMenuDTO getOrderMenu(int id){
 		OrderMenuDTO orderMenu = new OrderMenuDTO();
 		Statement stmt = null;
 		
         try{
             stmt = getConnection().createStatement();
-            String sqlStr = "SELECT * FROM caphe_java_db.ordermenu WHERE name = '" + name + "'";
+            String sqlStr = "SELECT * FROM ordermenus WHERE id = '" + id + "'";
             ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
 			
 			if(rs != null && rs.next()){
-            	orderMenu.setId(rs.getInt("price"));
+				orderMenu.setId(rs.getInt("id"));
+				orderMenu.setPrice(rs.getInt("price"));
             	orderMenu.setName(rs.getString("name"));
             }
-
         }catch(SQLException ex){
             ex.printStackTrace();
         } 

@@ -34,12 +34,12 @@ public class OrderMenuBO {
         return createResult;
     }
 
-	public OrderMenuDTO getOrderMenu(String name) {
+	public static OrderMenuDTO getOrderMenu(int id) {
 		OrderMenuDTO orderMenu = null;
 		OrderMenuMapper mapper = null;
         try {
         	mapper = new OrderMenuMapper();
-        	orderMenu = mapper.getOrderMenu(name);
+        	orderMenu = mapper.getOrderMenu(id);
         } catch (Exception ex) {
             Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
