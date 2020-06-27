@@ -20,7 +20,7 @@ public class DBConnectionService {
 	    	loadJDBCDriver();
 	    try {
 	    
-	    	connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/caphe_java_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+	    	connect = DriverManager.getConnection("jdbc:mysql://localhost:3308/caphe_java_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
 	    			"root", "");
 	    } catch (java.sql.SQLException e) {
 	    	throw new Exception("Can not access to Database Server ..." + e.getMessage());
