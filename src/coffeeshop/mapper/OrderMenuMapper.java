@@ -59,8 +59,8 @@ public class OrderMenuMapper extends DBMapper{
 			String sqlStr = "";
 			
 			if(orderMenuInfo == null){
-				 sqlStr = "SELECT ordermenus.id, ordermenus.name, ordermenus.price"
-					+ " ORDER BY ordermenus.id ASC ";
+				 sqlStr = "SELECT id, name, price FROM ordermenus WHERE 1"
+					+ " ORDER BY id ASC ";
 			}else{
 				// sqlStr = "SELECT ordermenus.id, ordermenus.firstname, ordermenus.lastname, ordermenus.sex,"
 				// 	+ " ordermenus.address, ordermenus.email, ordermenus.mobilephone, ordermenus.groupid, orderMenugroup.groupname"

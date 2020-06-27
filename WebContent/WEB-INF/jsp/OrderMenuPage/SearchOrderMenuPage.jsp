@@ -1,10 +1,19 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@page import="coffeeshop.dto.UserDTO"%>
+<%@page import="coffeeshop.dto.OrderMenuDTO"%>
 <%@page import="java.util.ArrayList" %>
 <jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
 <jsp:param name="pageTitle" value="Order Menu Page"/>
 <jsp:param name="pageHeading" value="Order Menu List"/>
 </jsp:include>
+
+<style>
+	/* Chrome, Safari, Edge, Opera */
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+	}
+</style>
 
 <!-- ###################### START TO INPUT YOUR CODE FROM HERE ###################### -->
 <!-- Begin Page Content -->
@@ -22,65 +31,34 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Search User Information</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Search Order Menu Information</h6>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form method="get" action="SearchUserServlet" id="searchUserForm">
+                        <form method="get" action="SearchOrderMenuServlet" id="searchOrderMenuForm">
                             <% 
-                                UserDTO userSearchInfo = (UserDTO) session.getAttribute("userSearchInfo");
+                                OrderMenuDTO orderMenuSearchInfo = (OrderMenuDTO) session.getAttribute("orderMenuSearchInfo");
                             %>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Email" 
-                                    name="email" value="<%=userSearchInfo.getEmail() %>" aria-describedby="basic-addon2">
+                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Name" 
+                                    name="name" value="<%=orderMenuSearchInfo.getName() %>" aria-describedby="basic-addon2">
                                 </div>
                             </div>
                             <br>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="First name" 
-                                    name="firstname" value="<%=userSearchInfo.getFirstname() %>" aria-describedby="basic-addon2">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Last name" 
-                                    name="lastname" value="<%=userSearchInfo.getLastname() %>" aria-describedby="basic-addon2">
+                                    <input type="number" class="form-control bg-light border-0 small" placeholder="Price" 
+                                    name="price" value="<%=orderMenuSearchInfo.getPrice() %>" aria-describedby="basic-addon2">
                                 </div>
                             </div>
-                            <br>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Sex" 
-                                    name="sex" value="<%=userSearchInfo.getSex() %>" aria-describedby="basic-addon2">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Address" 
-                                    name="address" value="<%=userSearchInfo.getAddress() %>" aria-describedby="basic-addon2">
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Mobile phone" 
-                                    name="mobilephone" value="<%=userSearchInfo.getMobilephone() %>" aria-describedby="basic-addon2">
-                                </div>
-                                <div class="col-md-6">
-                                    <select name="groupid" class="form-control bg-light border-0 small">
-                                        <option value="0" selected>All</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">User</option>
-                                        <option value="3">Customer</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br>  
+                            <br> -->
                         </form>
                     </div>
                 </div>
             </div>
+
             <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-4">
                 <div class="card shadow mb-4">
@@ -93,7 +71,7 @@
                     <div class="card-body">
                         <div class="pt-2 pb-2">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-icon-split" form="searchUserForm" value="Submit">
+                                <button type="submit" class="btn btn-primary btn-icon-split" form="searchOrderMenuForm" value="Submit">
                                 <span class="icon text-white-50"><i class="fas fa-search"></i></span>
                                 <span class="text btn-text-action-list">Search Order Menu</span>
                                 </button>
@@ -101,7 +79,7 @@
                             <br>
 
                             <div>
-                                <a href="<%=request.getContextPath()%>/GoCreateUserServlet" class="btn btn-success btn-icon-split">
+                                <a href="<%=request.getContextPath()%>/GoCreateOrderMenuServlet" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50"><i class="fas fa-check"></i></span>
                                     <span class="text btn-text-action-list">Create Order Menu</span>
                                 </a>
@@ -109,7 +87,7 @@
                             <br>
 
                             <div>
-                                <a href="<%=request.getContextPath()%>/DeleteUserServlet" class="btn btn-danger btn-icon-split">
+                                <a href="<%=request.getContextPath()%>/DeleteOrderMenuServlet" class="btn btn-danger btn-icon-split">
                                     <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
                                     <span class="text btn-text-action-list">Delete Order Menu</span>
                                 </a>
@@ -141,55 +119,44 @@
                             <tr>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Last name</th>
-                            <th>Sex</th>
-                            <th>Address</th>
-                            <th>Mobile-phone</th>
-                            <th>Role name</th>
                             <th>Select</th>
                             </tr>
                         </thead>
                         <tbody>
                         <% 
-                        ArrayList<UserDTO> userDeleteList = (ArrayList) session.getAttribute("userDeleteList");
-                        ArrayList<UserDTO> users = (ArrayList<UserDTO>) request.getAttribute("users"); 
-                        for (int i = 0; i < users.size(); i++) {
-                            UserDTO getUser = users.get(i); %>
+                        ArrayList<OrderMenuDTO> orderMenuDeleteList = (ArrayList) session.getAttribute("orderMenuDeleteList");
+                        ArrayList<OrderMenuDTO> orderMenus = (ArrayList<OrderMenuDTO>) request.getAttribute("orderMenus"); 
+                        for (int i = 0; i < orderMenus.size(); i++) {
+                            OrderMenuDTO getOrderMenu = orderMenus.get(i); %>
                             <tr>
-                            <td><a href="<%=request.getContextPath()%>/ViewUserServlet?email=<%=getUser.getEmail()%>"><%=getUser.getEmail()%></a></td>
-                            <td><%=getUser.getFirstname()%></td>
-                            <td><%=getUser.getLastname()%></td>
-                            <td><%=getUser.getSex()%></td>
-                            <td><%=getUser.getAddress()%></td>
-                            <td><%=getUser.getMobilephone()%></td>
-                            <td><%=getUser.getGroupname()%></td>
+                            <td><%=getOrderMenu.getName()%></td>
+                            <td><%=getOrderMenu.getPrice()%></td>
                             <%
-                                boolean checkUsername = false;
-                                    if (userDeleteList != null)
+                                boolean checkOrderMenuname = false;
+                                    if (orderMenuDeleteList != null)
                                     {
-                                        for (int j = 0; j < userDeleteList.size(); j++) {
-                                            UserDTO newUser = userDeleteList.get(j);
-                                            if (newUser.getId() == getUser.getId()) {
-                                                checkUsername = true;
+                                        for (int j = 0; j < orderMenuDeleteList.size(); j++) {
+                                            OrderMenuDTO newOrderMenu = orderMenuDeleteList.get(j);
+                                            if (newOrderMenu.getId() == getOrderMenu.getId()) {
+                                                checkOrderMenuname = true;
                                                 break;
                                             }
                                         }%>
                                             <td><input type="checkbox" name="selectAndUpdate" 
                                             <%
-                                            if (checkUsername == true)
+                                            if (checkOrderMenuname == true)
                                             {
                                                 out.print("checked");
                                             }
                                             %>
-                                            onclick='window.location.assign("UpdateUserDeleteList?email=<%=getUser.getEmail()%>")'/></td> 
+                                            /></td> 
                                             
                                     <%}
                                     else {%>
                                         <td>
-                                        <input type="checkbox" name="selectAndUpdate" 
-                                            onclick='window.location.assign("UpdateUserDeleteList?email=<%=getUser.getEmail()%>")'/>
+                                        <input type="checkbox" name="selectAndUpdate" />
                                     </td> 
-                                    </tr>
+                            </tr>
                                     <%}
                             }%>
                         </tbody>

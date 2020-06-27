@@ -39,7 +39,7 @@ public class GoSearchOrderMenuServlet extends HttpServlet {
 		}  
 		  
 		// Remove old search info stored in session if exists
-		OrderMenuDTO orderMenuSearchInfo = (OrderMenuDTO) session.getAttribute("useSearchInfo");
+		OrderMenuDTO orderMenuSearchInfo = (OrderMenuDTO) session.getAttribute("orderMenuSearchInfo");
 		if (orderMenuSearchInfo != null){
 			session.removeAttribute("orderMenuSearchInfo");
 		}
