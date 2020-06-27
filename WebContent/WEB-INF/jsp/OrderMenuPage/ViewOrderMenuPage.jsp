@@ -17,10 +17,10 @@
 <!-- ###################### START TO INPUT YOUR CODE FROM HERE ###################### -->
 <!-- Begin Page Content -->
 		<!-- Alert information -->
-		<c:if test="${createResult != null}">
+		<c:if test="${updateResult != null}">
 	 		<jsp:include page="/asset/PageCustomLayout/alert-layout.jsp">
-			<jsp:param name="result" value="${createResult}"/>
-			<jsp:param name="message" value="${createMessage}"/>
+			<jsp:param name="result" value="${updateResult}"/>
+			<jsp:param name="message" value="${updateMessage}"/>
 			</jsp:include>
 		</c:if>
        <!-- Content Row -->
@@ -36,7 +36,9 @@
 					
 					<!-- Card Body -->
 					<div class="card-body">
-						<form method="post" action="./InsertOrderMenuServlet">
+						<form method="post" action="UpdateOrderMenuServlet">
+							<input type="hidden" name="id" value="${orderMenu.getId()}">
+
 							<div class="row">
 								<div class="col-md-12">
 									<h4 class="small font-weight-bold">Drink name</h4>

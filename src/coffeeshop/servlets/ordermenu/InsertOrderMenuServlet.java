@@ -68,7 +68,7 @@ public class InsertOrderMenuServlet extends HttpServlet {
 			
 			if(createResult == false){
 				createMessage = "Server error. Please try again later";
-				orderMenu = orderMenuBO.getOrderMenu(request.getParameter("name"));
+				orderMenu = OrderMenuBO.getOrderMenu(Integer.parseInt(request.getParameter("id")));
 				
 				if(orderMenu != null){
 					createMessage = "Drinks name existed in system";

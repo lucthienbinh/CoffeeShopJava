@@ -91,4 +91,25 @@ public class OrderMenuMapper extends DBMapper{
 
 		return orderMenus;
 	}
+
+	public boolean updateOrderMenu(OrderMenuDTO orderMenu) {
+		boolean updateResult = false;
+		Statement stmt = null;
+
+		String a = orderMenu.getName();
+		int b = orderMenu.getPrice();
+		int c = orderMenu.getId();
+
+		try {
+			stmt = getConnection().createStatement();
+			String sqlStr = "UPDATE ordermenus SET " 
+					+ " name = '" + a + "',"
+					+ " price = '" + b + "'"
+					+ " WHERE id = " + c; 
+			updateResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		 } 
+		return updateResult;
+   }
 }

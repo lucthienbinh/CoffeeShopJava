@@ -70,4 +70,23 @@ public class OrderMenuBO {
         }
         return orderMenus;
     }
+
+    public static boolean updateOrderMenu(OrderMenuDTO orderMenu) {
+		boolean updateResult = false;
+        OrderMenuMapper mapper = null;
+
+        try{
+            mapper = new OrderMenuMapper();
+            updateResult = mapper.updateOrderMenu(orderMenu);
+        }catch(Exception ex){
+            Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                mapper.closeConnection();
+            }catch(Exception ex) {
+                Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return updateResult;
+	}
 }
