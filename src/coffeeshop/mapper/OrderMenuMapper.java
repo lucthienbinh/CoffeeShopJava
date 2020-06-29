@@ -3,6 +3,7 @@ package coffeeshop.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import coffeeshop.dto.OrderMenuDTO;
 
@@ -45,5 +46,38 @@ public class OrderMenuMapper extends DBMapper{
         } 
         return orderMenu;
 	 }
+
+	public ArrayList<OrderMenuDTO> searchOrdermenu(OrderMenuDTO orderMenuInfo) {
+		ArrayList<OrderMenuDTO> orderMenus = new ArrayList<>();    
+        Statement stmt = null;
+        try {     
+            stmt = getConnection().createStatement();
+            String sqlStr = "";
+            if (orderMenuInfo == null)
+            {
+            	 sqlStr = "SELECT * "
+            		+ " FROM caphe_java_db.ordermenu"
+            		+ " ORDER BY id ASC ";
+            }
+            else
+            {
+            	sqlStr = "SELECT * "
+            		+ " FROM caphe_java_db.ordermenu"
+            		+ " WHERE name LIKE '%" + orderMenuInfo.getName() + "%'";
+            }
+            ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
+            while (rs != null && rs.next()) {
+            	OrderMenuDTO orderMenu = new OrderMenuDTO();
+            	orderMenu.setId(rs.getInt("id"));
+            	orderMenu.setName(rs.getString("name"));
+            	orderMenu.setPrice(rs.getInt("price"));
+            	orderMenus.add(orderMenu);
+            }          
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+        
+        return orderMenus;
+	}
 
 }

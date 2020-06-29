@@ -50,7 +50,7 @@ public class CustomerMapper extends DBMapper {
         } 
         
         return customers;
-}
+	}
 
 	public CustomerDTO getCustomer(String email) {
 		CustomerDTO user = new CustomerDTO();

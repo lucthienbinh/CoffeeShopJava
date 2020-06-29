@@ -116,7 +116,7 @@ public class UserMapper extends DBMapper{
 						+ " AND users.email LIKE '%" + userInfo.getEmail()+ "%'"
 						+ " AND users.mobilephone LIKE '%" + userInfo.getMobilephone()+ "%'";
 	            	if (userInfo.getGroupid() != 0)
-	            		sqlStr += " AND users.groupid LIKE '%" + userInfo.getGroupid()+ "%'";
+	            		sqlStr += " AND users.groupid = " + userInfo.getGroupid();
 	            	sqlStr += " ORDER BY users.id ASC ";
 	            }
 	            ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server

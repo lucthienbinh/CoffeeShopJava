@@ -1,12 +1,15 @@
 package coffeeshop.bo;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 
 import coffeeshop.dto.OrderMenuDTO;
+import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.mapper.OrderMenuMapper;
+import coffeeshop.mapper.OrderingBillMapper;
 
 public class OrderMenuBO {
 	private ServletContext context;
@@ -51,4 +54,23 @@ public class OrderMenuBO {
         }        
         return orderMenu;
 	}
+	
+	public ArrayList<OrderMenuDTO> searchOrderMenu(OrderMenuDTO orderMenu) {
+        ArrayList<OrderMenuDTO> orderMenus = null;
+        OrderMenuMapper mapper = null;
+        try {
+            mapper = new OrderMenuMapper();
+            orderMenus = mapper.searchOrdermenu(orderMenu);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return orderMenus;
+    }
 }

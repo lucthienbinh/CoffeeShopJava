@@ -139,7 +139,7 @@
         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Ordering Bill Action List:</h6>
-            <a class="collapse-item" href="">Ordering Bill List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchOrderingBillServlet">Ordering Bill List</a>
             <a class="collapse-item" href="">Create Ordering Bill</a>
           </div>
         </div>
