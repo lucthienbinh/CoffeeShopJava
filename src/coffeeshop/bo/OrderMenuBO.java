@@ -88,5 +88,72 @@ public class OrderMenuBO {
             }
         } 
         return updateResult;
-	}
+    }
+    
+    public boolean deleteOrderMenuInList(ArrayList<OrderMenuDTO> orderMenuDeleteList) {
+    	boolean deleteResult = false;
+        OrderMenuMapper mapper = null;
+
+        try{
+            mapper = new OrderMenuMapper();
+            deleteResult = mapper.deleteOrderMenuInList(orderMenuDeleteList);
+        }catch(Exception ex){
+            Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                mapper.closeConnection();
+            }catch(Exception ex){
+                Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        
+        return deleteResult;
+    }
+
+    public static ArrayList<OrderMenuDTO> updateOrderMenuDeleteList
+    (ArrayList<OrderMenuDTO> orderMenuDeleteList, int id) {
+
+        OrderMenuMapper orderMenuMapper = null;
+        ArrayList<OrderMenuDTO> orderMenuNewArray = new ArrayList<OrderMenuDTO>();
+        
+        try{
+            orderMenuMapper = new OrderMenuMapper();
+            OrderMenuDTO orderMenu = orderMenuMapper.getOrderMenu(id);
+            
+            if(orderMenu != null){
+                // if orderMenu delete list is empty
+                if(orderMenuDeleteList == null){
+                    orderMenuNewArray.add(orderMenu);
+                }else{
+                    //if email is exist or not 
+                    boolean orderMenunameExisted = false;
+                    
+                    for(int i = 0; i < orderMenuDeleteList.size(); i++){
+                        OrderMenuDTO getOrderMenu = orderMenuDeleteList.get(i);
+                        if(getOrderMenu.getId() == id){
+                            orderMenunameExisted = true;
+                            // continue to not add orderMenu to new array ~ delete orderMenu in delete list
+                            continue;
+                        }
+                        orderMenuNewArray.add(getOrderMenu);
+                    }
+        
+                    //if id isn't exist
+                    if(orderMenunameExisted == false){
+                        orderMenuNewArray.add(orderMenu);
+                    }
+                }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            if(orderMenuMapper != null)try {
+                orderMenuMapper.closeConnection();
+            }catch (Exception ex) {
+                Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return orderMenuNewArray;
+    }
 }

@@ -105,7 +105,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Order Menu List Result</h6>
             </div>
 
-            <div class="card-body">
+            <div class="card-body" style="cursor:default">
                 <div class="table-responsive">
                     <table class="table" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -135,19 +135,20 @@
                                                 break;
                                             }
                                         }%>
-                                            <td><input type="checkbox" name="selectAndUpdate" 
+                                            <td><input type="checkbox" name="selectAndUpdate" style="cursor:pointer"
                                             <%
                                             if (checkOrderMenuname == true)
                                             {
                                                 out.print("checked");
                                             }
                                             %>
-                                            /></td> 
-                                            
+                                            onclick='window.location.assign("UpdateOrderMenuDeleteList?id=<%=getOrderMenu.getId()%>")'/>
+                                            </td> 
                                     <%}
                                     else {%>
                                         <td>
-                                        <input type="checkbox" name="selectAndUpdate" />
+                                        <input type="checkbox" name="selectAndUpdate" style="cursor:pointer"
+                                        onclick='window.location.assign("UpdateOrderMenuDeleteList?id=<%=getOrderMenu.getId()%>")'/>
                                     </td> 
                             </tr>
                                     <%}

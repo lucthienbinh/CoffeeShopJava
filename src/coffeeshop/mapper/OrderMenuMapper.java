@@ -103,4 +103,31 @@ public class OrderMenuMapper extends DBMapper{
 		 } 
 		return updateResult;
    }
+
+   public boolean deleteOrderMenu(int id){
+		Statement stmt = null;
+		boolean deleteResult = false;
+
+		try{
+		stmt = getConnection().createStatement();
+		String sqlStr = "DELETE FROM caphe_java_db.ordermenus WHERE id = " + id;
+		deleteResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+
+		return deleteResult;	 
+   }
+
+    public boolean deleteOrderMenuInList(ArrayList<OrderMenuDTO> orderMenuDeleteList){
+		for(int i = 0; i < orderMenuDeleteList.size(); i++){
+			OrderMenuDTO getOrderMenu = orderMenuDeleteList.get(i);
+
+			if (this.deleteOrderMenu(getOrderMenu.getId()) == false){
+				return false;
+			}
+		}
+		return true;
+    }
+
 }
