@@ -126,19 +126,17 @@
                             <td><%=getOrderMenu.getPrice()%></td>
                             <%
                                 boolean checkOrderMenuname = false;
-                                    if (orderMenuDeleteList != null)
-                                    {
+                                    if (orderMenuDeleteList != null){
                                         for (int j = 0; j < orderMenuDeleteList.size(); j++) {
                                             OrderMenuDTO newOrderMenu = orderMenuDeleteList.get(j);
-                                            if (newOrderMenu.getId() == getOrderMenu.getId()) {
+                                            
+                                            if(newOrderMenu.getId() == getOrderMenu.getId()){
                                                 checkOrderMenuname = true;
                                                 break;
                                             }
                                         }%>
                                             <td><input type="checkbox" name="selectAndUpdate" style="cursor:pointer"
-                                            <%
-                                            if (checkOrderMenuname == true)
-                                            {
+                                            <%  if(checkOrderMenuname == true){
                                                 out.print("checked");
                                             }
                                             %>

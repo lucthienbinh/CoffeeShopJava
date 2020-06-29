@@ -90,7 +90,7 @@ public class OrderMenuBO {
         return updateResult;
     }
     
-    public boolean deleteOrderMenuInList(ArrayList<OrderMenuDTO> orderMenuDeleteList) {
+    public static boolean deleteOrderMenuInList(ArrayList<OrderMenuDTO> orderMenuDeleteList){
     	boolean deleteResult = false;
         OrderMenuMapper mapper = null;
 
