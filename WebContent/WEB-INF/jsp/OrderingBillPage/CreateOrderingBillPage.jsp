@@ -86,7 +86,7 @@
 	    		<br>
 	    		<div class="row">
 	    			<div class="col-md-12 d-sm-flex align-items-center justify-content-between">
-		                <a href="<%=request.getContextPath()%>/GoSearchOrderMenuServlet" class="btn btn-secondary  btn-icon-split">
+		                <a href="<%=request.getContextPath()%>/GoSearchOrderingBillServlet" class="btn btn-secondary  btn-icon-split">
 				           <span class="icon text-gray-600">
 				             <i class="fas fa-angle-left"></i>
 				           </span>

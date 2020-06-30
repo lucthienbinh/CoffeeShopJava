@@ -51,10 +51,6 @@ public class InsertOrderingBillServlet extends HttpServlet {
 		{
 			session.removeAttribute("orderingBillInfo");
 			session.removeAttribute("orderingBillDetailList");
-			orderingBillInfo.setTotalPrice(0);
-			orderingBillInfo.setCustomerId(0);
-			orderingBillInfo.setCustomerName(null);
-	        session.setAttribute("orderingBillInfo", orderingBillInfo);
 			int lastId = orderingBillBO.createOrderingBill(orderingBillInfo);
 			if (lastId != 0)
 			{
@@ -64,6 +60,10 @@ public class InsertOrderingBillServlet extends HttpServlet {
 					createMessage = "New ordering bill has been created";
 				}	
 			}
+			orderingBillInfo.setTotalPrice(0);
+			orderingBillInfo.setCustomerId(0);
+			orderingBillInfo.setCustomerName(null);
+	        session.setAttribute("orderingBillInfo", orderingBillInfo);
 		}
 		else
 		{
