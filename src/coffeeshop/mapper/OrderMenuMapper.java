@@ -20,7 +20,7 @@ public class OrderMenuMapper extends DBMapper{
 		 
 		try{
 			 stmt = getConnection().createStatement();
-		     String sqlStr = "INSERT INTO caphe_java_db.ordermenus (`name`, `price`) VALUES ('"
+		     String sqlStr = "INSERT INTO caphe_java_db.ordermenu (`name`, `price`) VALUES ('"
 		    		 + orderMenu.getName() + "','"
 		    		 + orderMenu.getPrice() + "')";
 		     createResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
@@ -36,7 +36,7 @@ public class OrderMenuMapper extends DBMapper{
 		
         try{
             stmt = getConnection().createStatement();
-            String sqlStr = "SELECT * FROM ordermenus WHERE id = '" + id + "'";
+            String sqlStr = "SELECT * FROM ordermenu WHERE id = '" + id + "'";
             ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
 			
 			if(rs != null && rs.next()){
@@ -60,10 +60,10 @@ public class OrderMenuMapper extends DBMapper{
 			String sqlStr = "";
 			
 			if(orderMenuInfo == null){
-				 sqlStr = "SELECT id, name, price FROM ordermenus WHERE 1"
+				 sqlStr = "SELECT id, name, price FROM ordermenu WHERE 1"
 					+ " ORDER BY id ASC ";
 			}else{
-				sqlStr = "SELECT id, name, price FROM ordermenus"
+				sqlStr = "SELECT id, name, price FROM ordermenu"
 					+ " WHERE name LIKE '%" + orderMenuInfo.getName() + "%'"
 					+ " ORDER BY name ASC ";
 			}
@@ -93,7 +93,7 @@ public class OrderMenuMapper extends DBMapper{
 
 		try {
 			stmt = getConnection().createStatement();
-			String sqlStr = "UPDATE ordermenus SET " 
+			String sqlStr = "UPDATE ordermenu SET " 
 					+ " name = '" + a + "',"
 					+ " price = '" + b + "'"
 					+ " WHERE id = " + c; 
@@ -110,7 +110,7 @@ public class OrderMenuMapper extends DBMapper{
 
 		try{
 		stmt = getConnection().createStatement();
-		String sqlStr = "DELETE FROM caphe_java_db.ordermenus WHERE id = " + id;
+		String sqlStr = "DELETE FROM caphe_java_db.ordermenu WHERE id = " + id;
 		deleteResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
 		}catch(SQLException ex){
 			ex.printStackTrace();
