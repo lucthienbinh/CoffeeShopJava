@@ -1,4 +1,4 @@
 # database config file
-src/coffeeshop/dbconnection/
+/src/coffeeshop/dbconnection/
 # build foler
 build/
