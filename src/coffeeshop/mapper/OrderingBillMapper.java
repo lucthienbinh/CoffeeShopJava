@@ -63,7 +63,7 @@ public class OrderingBillMapper extends DBMapper {
 	}
 
 	public int createOrderingBill(OrderingBillDTO orderingBill) {
-		int LAST_INSERT_ID = 0;
+		int lastId = 0;
 		Statement stmt = null;
 		 
 		try{
@@ -72,11 +72,18 @@ public class OrderingBillMapper extends DBMapper {
 		    		 + orderingBill.getCustomerId() + "','"
     				 + orderingBill.getUserId()+ "','"
 		    		 + orderingBill.getTotalPrice() + "')";
-		     LAST_INSERT_ID = stmt.executeUpdate(sqlStr, Statement.RETURN_GENERATED_KEYS);
+		     if (stmt.executeUpdate(sqlStr, Statement.RETURN_GENERATED_KEYS) > 0)
+		     {
+		    	 ResultSet rs = stmt.getGeneratedKeys();
+			     if (rs.next()){
+			    	 lastId=rs.getInt(1);
+			     }
+		     }
+		     
 		}catch(SQLException ex){
 		     ex.printStackTrace();
 	 	} 
-		return LAST_INSERT_ID;
+		return lastId;
 	}
 
 }
