@@ -45,7 +45,7 @@ public class OrderingBillMapper extends DBMapper {
             	OrderingBillDTO orderingBill = new OrderingBillDTO();
             	orderingBill.setId(rs.getInt("id"));
             	orderingBill.setCustomerName(rs.getString("name"));
-            	orderingBill.setUserName(rs.getString("firstname")+rs.getString("lastname"));
+            	orderingBill.setUserName(rs.getString("firstname")+" "+rs.getString("lastname"));
             	orderingBill.setTotalPrice(rs.getInt("totalPrice"));
             	orderingBills.add(orderingBill);
             }          

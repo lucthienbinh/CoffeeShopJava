@@ -17,6 +17,8 @@ import coffeeshop.bo.OrderMenuBO;
 import coffeeshop.bo.UserBO;
 import coffeeshop.dto.CustomerDTO;
 import coffeeshop.dto.OrderMenuDTO;
+import coffeeshop.dto.OrderingBillDTO;
+import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class GoCreateOrderingBillServlet
@@ -42,8 +44,16 @@ public class GoCreateOrderingBillServlet extends HttpServlet {
         ArrayList<CustomerDTO> customers = customerBO.searchCustomer(null);
         request.setAttribute("customers", customers);
         // Get order menu info
-        ArrayList<OrderMenuDTO> orderMenus = orderMenuBO.searchOrderMenu(null);
+        ArrayList<OrderMenuDTO> orderMenus = OrderMenuBO.searchOrderMenu(null);
         request.setAttribute("orderMenus", orderMenus);
+        
+        // Create orderingBillInfo with userID is current User
+        OrderingBillDTO orderingBillInfo = new OrderingBillDTO();
+        UserDTO user = userBO.getAuthorizationUser(session);
+        orderingBillInfo.setUserId(user.getId());
+        orderingBillInfo.setTotalPrice(0);
+        session.setAttribute("orderingBillInfo", orderingBillInfo);
+        
 		RequestDispatcher dispatcher 
 		 = request.getRequestDispatcher
 	 	 ("./WEB-INF/jsp/OrderingBillPage/CreateOrderingBillPage.jsp");

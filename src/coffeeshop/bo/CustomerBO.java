@@ -54,6 +54,24 @@ public class CustomerBO {
         }        
         return customer;
     }
+    
+    public CustomerDTO getCustomerById(int id) {
+    	CustomerDTO customer = null;
+    	CustomerMapper mapper = null;
+        try {
+        	mapper = new CustomerMapper();
+        	customer = mapper.getCustomerById(id);
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }        
+        return customer;
+    }
 	
 	public ArrayList<CustomerDTO> updateCustomerDeleteList(ArrayList<CustomerDTO> customerDeleteList,
 			String currentEmail) {

@@ -1,5 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@page import="coffeeshop.dto.CustomerDTO"%>
+<%@page import="coffeeshop.dto.OrderingBillDTO"%>
 <%@page import="java.util.ArrayList" %>
 <jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
 <jsp:param name="pageTitle" value="Create Ordering Bill Page"/>
@@ -82,7 +83,7 @@
 								<td><c:out value="${orderMenu.name}" /></td>
 								<td><c:out value="${orderMenu.price}" /></td>
 								<td>
-								<a href="<%=request.getContextPath()%>/UpdateOrderingBillServlet?orderMenuId=${orderMenu.id}" class="btn btn-primary  btn-icon-split">
+								<a href="<%=request.getContextPath()%>/UpdateOrderingBillServlet?addOrderMenuId=${orderMenu.id}" class="btn btn-primary  btn-icon-split">
 									<span class="text">Select</span>
 								</a>
 								</td>
@@ -113,14 +114,14 @@
 	    			<div class="col-md-12">
 	    				<h4 class="small font-weight-bold">Customer name</h4>
 	    				<input type="text" class="form-control bg-light border-0 small" placeholder="Select customer" 
-	    				disabled aria-describedby="basic-addon2">
+	    				disabled value="${orderingBillInfo.customerName}" aria-describedby="basic-addon2">
 	    			</div>
 	    		</div>
 	    		<br>
 	    		<div class="row">
 	    			<div class="col-md-12">
 	    			<h4 class="small font-weight-bold">Total Price</h4>
-	    				<input type="text" class="form-control bg-light border-0 small" placeholder="Input Price" 
+	    				<input type="text" class="form-control bg-light border-0 small" value="${orderingBillInfo.totalPrice}"
 	    				name="price" aria-describedby="basic-addon2">
 	    			</div>
 	    		</div>

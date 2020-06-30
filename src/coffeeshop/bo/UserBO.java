@@ -222,4 +222,10 @@ public class UserBO {
 			}
 		}
 	}
+	
+	public UserDTO getAuthorizationUser (HttpSession session) {
+		String currentUserEmail = session.getAttribute("email").toString();
+		UserDTO user = this.getUser(currentUserEmail);
+		return user;
+	}
 }
