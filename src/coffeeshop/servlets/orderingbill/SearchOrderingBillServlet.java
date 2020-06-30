@@ -34,7 +34,7 @@ public class SearchOrderingBillServlet extends HttpServlet {
 	
 	private int validateInteger(String integerCheck)
 	{
-		if(integerCheck == null) 
+		if(integerCheck == null || integerCheck.equals(""))
 		{
 			return 0;
 		}

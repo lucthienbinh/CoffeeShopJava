@@ -27,32 +27,28 @@
              </div>
              <!-- Card Body -->
              <div class="card-body">
-                <form method="get" action="SearchOrderingBillServlet" id="searchOrderingBillForm">
-    		<% 
-    			OrderingBillDTO orderingBillSearchInfo = (OrderingBillDTO) session.getAttribute("orderingBillSearchInfo");
-    		%>
-    		
-    		<div class="row">
-    			<div class="col-md-12">
-    				<input type="text" class="form-control bg-light border-0 small" placeholder="Customer name" 
-    				name="customerName" value="<%=orderingBillSearchInfo.getCustomerName() %>" aria-describedby="basic-addon2">
-    			</div>
-    		</div>
-    		<br>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<input type="text" class="form-control bg-light border-0 small" placeholder="User name" 
-    				name="userName" value="<%=orderingBillSearchInfo.getUserName() %>" aria-describedby="basic-addon2">
-    			</div>
-    		</div>
-    		<br>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<input type="number" class="form-control bg-light border-0 small" placeholder="Total price" 
-    				name="totalPrice" value="<%=orderingBillSearchInfo.getTotalPrice() %>" aria-describedby="basic-addon2">
-    			</div>
-    		</div>
-    		<br>
+                <form method="get" action="SearchOrderingBillServlet" id="searchOrderingBillForm">    		
+	    		<div class="row">
+	    			<div class="col-md-12">
+	    				<input type="text" class="form-control bg-light border-0 small" placeholder="Customer name" 
+	    				name="customerName" value="${orderingBillSearchInfo.customerName}" aria-describedby="basic-addon2">
+	    			</div>
+	    		</div>
+	    		<br>
+	    		<div class="row">
+	    			<div class="col-md-12">
+	    				<input type="text" class="form-control bg-light border-0 small" placeholder="User name" 
+	    				name="userName" value="${orderingBillSearchInfo.userName}" aria-describedby="basic-addon2">
+	    			</div>
+	    		</div>
+	    		<br>
+	    		<div class="row">
+	    			<div class="col-md-12">
+	    				<input type="number" class="form-control bg-light border-0 small" placeholder="Total price" 
+	    				name="totalPrice" value="${orderingBillSearchInfo.totalPrice}" aria-describedby="basic-addon2">
+	    			</div>
+	    		</div>
+	    		<br>
      			</form>
              </div>
            </div>

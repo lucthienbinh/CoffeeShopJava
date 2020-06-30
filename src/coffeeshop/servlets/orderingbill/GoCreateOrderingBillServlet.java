@@ -51,6 +51,7 @@ public class GoCreateOrderingBillServlet extends HttpServlet {
         OrderingBillDTO orderingBillInfo = new OrderingBillDTO();
         UserDTO user = userBO.getAuthorizationUser(session);
         orderingBillInfo.setUserId(user.getId());
+        orderingBillInfo.setUserName(user.getFirstname()+" "+user.getLastname());
         orderingBillInfo.setTotalPrice(0);
         session.setAttribute("orderingBillInfo", orderingBillInfo);
         

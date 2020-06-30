@@ -1,6 +1,7 @@
 package coffeeshop.mapper;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -14,46 +15,68 @@ public class OrderingBillMapper extends DBMapper {
 	}
 	
 	public ArrayList<OrderingBillDTO> searchOrderingBill(OrderingBillDTO orderingBillInfo) {
-        ArrayList<OrderingBillDTO> orderingBills = new ArrayList<>();    
+        ArrayList<OrderingBillDTO> orderingBills = new ArrayList<>();   
         Statement stmt = null;
         try {     
             stmt = getConnection().createStatement();
             String sqlStr = "";
-            if (orderingBillInfo == null)
-            {
-            	sqlStr = "SELECT orderingbill.id, customers.name, users.lastname, users.firstname, orderingbill.totalPrice"
-            		+ " FROM caphe_java_db.orderingbill, caphe_java_db.customers, caphe_java_db.users "
-            		+ " WHERE orderingbill.customerId = customers.id "
-            		+ " AND orderingbill.userId = users.id "
-            		+ " ORDER BY orderingbill.id ASC ";
-            }
-            else
-            {
-            	sqlStr = "SELECT orderingbill.id, customers.name, users.lastname, users.firstname, orderingbill.totalPrice"
-            		+ " FROM caphe_java_db.orderingbill, caphe_java_db.customers, caphe_java_db.users"
-            		+ " WHERE orderingbill.customerId = customers.id "
-            		+ " AND orderingbill.userId = users.id "
-					+ " AND customers.name LIKE '%" + orderingBillInfo.getCustomerName() + "%'"
-					+ " AND users.lastname LIKE '%" + orderingBillInfo.getUserName()+ "%'"
-					+ " AND users.firstname LIKE '%" + orderingBillInfo.getUserName()+ "%'";
-            	if (orderingBillInfo.getTotalPrice() != 0)
-            		sqlStr += " AND orderingbill.totalPrice = " + orderingBillInfo.getTotalPrice();
-            	sqlStr += " ORDER BY orderingbill.id ASC ";
-            }
+            sqlStr = "SELECT orderingbill.customerId, orderingbill.id, customers.name, users.firstname, users.lastname, orderingbill.totalPrice"
+            		+ " FROM caphe_java_db.orderingbill "
+            		+ " LEFT JOIN caphe_java_db.customers ON orderingbill.customerId = customers.id "
+            		+ " LEFT JOIN caphe_java_db.users ON orderingbill.userId = users.id ";
+            		if (orderingBillInfo == null)
+            			sqlStr += " ORDER BY orderingbill.id ASC ";
+            		else
+            		{
+            			sqlStr += " WHERE concat(users.firstname, ' ', users.lastname) LIKE '%" + orderingBillInfo.getUserName()+ "%'";
+            			if (!orderingBillInfo.getCustomerName().isEmpty())
+            			{
+            				sqlStr += " AND orderingbill.customerId != " + 0;
+            				sqlStr += " AND customers.name LIKE '%" + orderingBillInfo.getCustomerName() + "%'";
+            			}
+            			if (orderingBillInfo.getTotalPrice() != 0)
+                    		sqlStr += " AND orderingbill.totalPrice = " + orderingBillInfo.getTotalPrice();
+                    	sqlStr += " ORDER BY orderingbill.id ASC ";
+            		}
+            			
             ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
             while (rs != null && rs.next()) {
             	OrderingBillDTO orderingBill = new OrderingBillDTO();
             	orderingBill.setId(rs.getInt("id"));
-            	orderingBill.setCustomerName(rs.getString("name"));
+            	if (rs.getInt("customerId") == 0)
+            	{
+            		orderingBill.setCustomerName("None customer");
+            	}
+            	else
+            	{
+            		orderingBill.setCustomerName(rs.getString("name"));
+            	}
             	orderingBill.setUserName(rs.getString("firstname")+" "+rs.getString("lastname"));
             	orderingBill.setTotalPrice(rs.getInt("totalPrice"));
             	orderingBills.add(orderingBill);
-            }          
+            }   
         } catch (Exception ex) {
             ex.printStackTrace();
         } 
         
         return orderingBills;
+	}
+
+	public int createOrderingBill(OrderingBillDTO orderingBill) {
+		int LAST_INSERT_ID = 0;
+		Statement stmt = null;
+		 
+		try{
+			 stmt = getConnection().createStatement();
+		     String sqlStr = "INSERT INTO caphe_java_db.orderingbill (`customerId`,`userId`,`totalPrice`) VALUES ('"
+		    		 + orderingBill.getCustomerId() + "','"
+    				 + orderingBill.getUserId()+ "','"
+		    		 + orderingBill.getTotalPrice() + "')";
+		     LAST_INSERT_ID = stmt.executeUpdate(sqlStr, Statement.RETURN_GENERATED_KEYS);
+		}catch(SQLException ex){
+		     ex.printStackTrace();
+	 	} 
+		return LAST_INSERT_ID;
 	}
 
 }

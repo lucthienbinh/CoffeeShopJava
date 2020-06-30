@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import coffeeshop.dto.OrderMenuDTO;
 import coffeeshop.dto.OrderingBillDetailDTO;
 import coffeeshop.mapper.OrderMenuMapper;
+import coffeeshop.mapper.OrderingBillDetailMapper;
 
 public class OrderingBillDetailBO {
     private ServletContext context;
@@ -29,8 +30,10 @@ public class OrderingBillDetailBO {
             
             OrderMenuDTO orderMenu = orderMenuMapper.getOrderMenu(orderMenuId);
             orderingBillDetail.setOrderMenuId(orderMenu.getId());
+            orderingBillDetail.setOrderMenuName(orderMenu.getName());
             orderingBillDetail.setQuantity(1);
             orderingBillDetail.setPrice(orderMenu.getPrice());
+            orderingBillDetail.setAmount(orderMenu.getPrice());
             
             if(orderMenu != null){
                 // if orderingBillDetailNewArray is empty
@@ -46,6 +49,7 @@ public class OrderingBillDetailBO {
                     for(int i = 0; i < orderingBillDetailList.size(); i++){
                     	OrderingBillDetailDTO getOrderingBillDetail = orderingBillDetailList.get(i);
                         if(getOrderingBillDetail.getOrderMenuId() == orderMenuId){
+                        	orderMenuIsExisted = true; 
                         	int quantity = getOrderingBillDetail.getQuantity();
                         	if (add == true) 
                         	{
@@ -62,7 +66,8 @@ public class OrderingBillDetailBO {
                         		quantity--;
                         		getOrderingBillDetail.setQuantity(quantity);
                         	}
-                        	orderMenuIsExisted = true; 
+                        	int amount = getOrderingBillDetail.getPrice() * getOrderingBillDetail.getQuantity();
+                        	getOrderingBillDetail.setAmount(amount);
                         }
                         orderingBillDetailNewArray.add(getOrderingBillDetail);
                     }
@@ -91,8 +96,35 @@ public class OrderingBillDetailBO {
     	int newTotalPrice = 0;
     	for(int i = 0; i < orderingBillDetailList.size(); i++){
     		OrderingBillDetailDTO getOrderingBillDetail = orderingBillDetailList.get(i);
-    		newTotalPrice += getOrderingBillDetail.getPrice() * getOrderingBillDetail.getQuantity();
+    		newTotalPrice += getOrderingBillDetail.getAmount();
     	}
     	return newTotalPrice;
     }
+
+	public boolean createOrderingBillDetail(ArrayList<OrderingBillDetailDTO> orderingBillDetailList,
+			int orderingBillId) {
+		boolean createResult = false;
+        OrderingBillDetailMapper mapper = null;
+        try {
+            mapper = new OrderingBillDetailMapper();
+            for(int i = 0; i < orderingBillDetailList.size(); i++){
+            	OrderingBillDetailDTO getOrderingBillDetail = orderingBillDetailList.get(i);
+            	createResult = mapper.createOrderingBillDetail(getOrderingBillDetail, orderingBillId);
+            	if (createResult == false)
+            	{
+            		break;
+            	}
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OrderingBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderingBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return createResult;
+	}
 }

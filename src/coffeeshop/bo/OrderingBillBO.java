@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 
 import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.mapper.CustomerMapper;
+import coffeeshop.mapper.OrderMenuMapper;
 import coffeeshop.mapper.OrderingBillMapper;
 
 public class OrderingBillBO {
@@ -35,4 +36,23 @@ public class OrderingBillBO {
         }
         return orderingBills;
     }
+
+	public int createOrderingBill(OrderingBillDTO orderingBill) {
+		int LAST_INSERT_ID = 0;
+		OrderingBillMapper mapper = null;
+        try {
+            mapper = new OrderingBillMapper();
+            LAST_INSERT_ID = mapper.createOrderingBill(orderingBill);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderingBillBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderingBillBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return LAST_INSERT_ID;
+	}
 }
