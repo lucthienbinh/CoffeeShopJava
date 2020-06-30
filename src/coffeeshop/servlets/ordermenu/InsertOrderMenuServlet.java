@@ -22,19 +22,15 @@ import coffeeshop.dto.OrderMenuDTO;
 public class InsertOrderMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private String validateString(String stringCheck)
-	{
-		if(stringCheck == null) 
-		{
+	private String validateString(String stringCheck){
+		if(stringCheck == null){
 			return "";
 		}
 		return stringCheck.trim();
 	}
 	
-	private int validateInteger(String integerCheck)
-	{
-		if(integerCheck == null) 
-		{
+	private int validateInteger(String integerCheck){
+		if(integerCheck == null){
 			return 0;
 		}
 		return Integer.parseInt(integerCheck);
@@ -47,36 +43,39 @@ public class InsertOrderMenuServlet extends HttpServlet {
 		ServletContext context =  request.getServletContext();
         UserBO userBO = new UserBO(context);
         OrderMenuBO orderMenuBO = new OrderMenuBO(context);
-        if (userBO.authorizationUser(session, 1) == false)
-        {
+		OrderMenuDTO orderMenu = new OrderMenuDTO();
+
+		if (userBO.authorizationUser(session, 1) == false){
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
-        }       
-        OrderMenuDTO orderMenu = new OrderMenuDTO();
-        // Get parameter in request
-        boolean checkRequireString = true; 
+		}
+		
+		// Get parameter in request
+		boolean checkRequireString = true; 
+		boolean createResult = false;
+		String createMessage = "Invalid request!";
+		
         if (this.validateString(request.getParameter("name")).isEmpty())
         	checkRequireString = false;
         if (this.validateString(request.getParameter("price")).isEmpty())
-        	checkRequireString = false;
-        boolean createResult = false;
-		String createMessage = "Invalid request!";
-        if (checkRequireString == true)
-        {
+			checkRequireString = false;
+
+        if(checkRequireString == true){
         	orderMenu.setName(this.validateString(request.getParameter("name")));
         	orderMenu.setPrice(this.validateInteger(request.getParameter("price")));
 			createResult = orderMenuBO.createOrderMenu(orderMenu);
 			createMessage = "New order menu has been created";
-			if (createResult == false)
-			{
+			
+			if(createResult == false){
 				createMessage = "Server error. Please try again later";
-				orderMenu = orderMenuBO.getOrderMenu(request.getParameter("name"));
-				if(orderMenu != null)
-				{
-					createMessage = "Drinks name exited in system";
+				orderMenu = OrderMenuBO.getOrderMenu(Integer.parseInt(request.getParameter("id")));
+				
+				if(orderMenu != null){
+					createMessage = "Drinks name existed in system";
 				}
 			}
-        }
+		}
+		
         request.setAttribute("createResult", createResult);
         request.setAttribute("createMessage", createMessage);
         RequestDispatcher dispatcher = request.getRequestDispatcher
