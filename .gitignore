@@ -1,4 +1,4 @@
 # database config file
-src/coffeeshop/dbconnection/DBConnectionService.java
+src/coffeeshop/dbconnection/
 # build foler
 build/
