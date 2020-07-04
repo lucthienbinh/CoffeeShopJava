@@ -46,7 +46,7 @@ public class GoSearchOrderingBillServlet extends HttpServlet {
 		newEmptyOrderingBillInfo.generateEmptyObjectForJSP();
 		session.setAttribute("orderingBillSearchInfo", newEmptyOrderingBillInfo);
 		// Get user info
-        ArrayList<OrderingBillDTO> orderingBills = orderingBillBO.searchCustomer(null);
+        ArrayList<OrderingBillDTO> orderingBills = orderingBillBO.searchOrderingBill(null);
         request.setAttribute("orderingBills", orderingBills);
         RequestDispatcher dispatcher 
                 = request.getRequestDispatcher

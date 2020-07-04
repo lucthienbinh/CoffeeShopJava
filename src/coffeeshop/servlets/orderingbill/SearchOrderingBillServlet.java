@@ -60,7 +60,7 @@ public class SearchOrderingBillServlet extends HttpServlet {
  		orderingBillSearchInfo.setTotalPrice(this.validateInteger(request.getParameter("totalPrice")));
  		session.setAttribute("orderingBillSearchInfo", orderingBillSearchInfo);
     	// Get user info
-        ArrayList<OrderingBillDTO> orderingBills = orderingBillBO.searchCustomer(orderingBillSearchInfo);
+        ArrayList<OrderingBillDTO> orderingBills = orderingBillBO.searchOrderingBill(orderingBillSearchInfo);
         request.setAttribute("orderingBills", orderingBills);
         RequestDispatcher dispatcher 
                 = request.getRequestDispatcher

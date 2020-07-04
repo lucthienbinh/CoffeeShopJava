@@ -24,20 +24,25 @@ public class OrderingBillMapper extends DBMapper {
             		+ " FROM caphe_java_db.orderingbill "
             		+ " LEFT JOIN caphe_java_db.customers ON orderingbill.customerId = customers.id "
             		+ " LEFT JOIN caphe_java_db.users ON orderingbill.userId = users.id ";
-            		if (orderingBillInfo == null)
-            			sqlStr += " ORDER BY orderingbill.id ASC ";
-            		else
+            		if (orderingBillInfo != null)
             		{
-            			sqlStr += " WHERE concat(users.firstname, ' ', users.lastname) LIKE '%" + orderingBillInfo.getUserName()+ "%'";
-            			if (!orderingBillInfo.getCustomerName().isEmpty())
+            			if (orderingBillInfo.getId() != 0)
             			{
-            				sqlStr += " AND orderingbill.customerId != " + 0;
-            				sqlStr += " AND customers.name LIKE '%" + orderingBillInfo.getCustomerName() + "%'";
+            				sqlStr += " WHERE orderingbill.id = " + orderingBillInfo.getId();
             			}
-            			if (orderingBillInfo.getTotalPrice() != 0)
-                    		sqlStr += " AND orderingbill.totalPrice = " + orderingBillInfo.getTotalPrice();
-                    	sqlStr += " ORDER BY orderingbill.id ASC ";
+            			else
+            			{
+            				sqlStr += " WHERE concat(users.firstname, ' ', users.lastname) LIKE '%" + orderingBillInfo.getUserName()+ "%'";
+	            			if (!orderingBillInfo.getCustomerName().isEmpty())
+	            			{
+	            				sqlStr += " AND orderingbill.customerId != " + 0;
+	            				sqlStr += " AND customers.name LIKE '%" + orderingBillInfo.getCustomerName() + "%'";
+	            			}
+	            			if (orderingBillInfo.getTotalPrice() != 0)
+	                    		sqlStr += " AND orderingbill.totalPrice = " + orderingBillInfo.getTotalPrice();
+            			}
             		}
+            		sqlStr += " ORDER BY orderingbill.id ASC ";
             			
             ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
             while (rs != null && rs.next()) {
@@ -84,6 +89,29 @@ public class OrderingBillMapper extends DBMapper {
 		     ex.printStackTrace();
 	 	} 
 		return lastId;
+	}
+	public boolean deleteOrderingBill(int id) {
+		 Statement stmt = null;
+		 boolean deleteResult = false;
+		 try {
+           stmt = getConnection().createStatement();
+           String sqlStr = "DELETE FROM caphe_java_db.orderingbill WHERE id = " + id;
+           deleteResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       } 
+       return deleteResult;	 
+	 }
+
+	public boolean deleteOrderingBillInList(ArrayList<OrderingBillDTO> orderingBillDeleteList) {
+		for (int i = 0; i < orderingBillDeleteList.size(); i++) {
+			OrderingBillDTO getOrderingBill = orderingBillDeleteList.get(i);
+        	if (this.deleteOrderingBill(getOrderingBill.getId()) == false)
+        	{
+        		return false;
+        	}
+        }
+		return true;
 	}
 
 }

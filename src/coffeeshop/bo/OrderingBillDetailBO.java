@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 
 import coffeeshop.dto.OrderMenuDTO;
+import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.dto.OrderingBillDetailDTO;
 import coffeeshop.mapper.OrderMenuMapper;
 import coffeeshop.mapper.OrderingBillDetailMapper;
+import coffeeshop.mapper.OrderingBillMapper;
 
 public class OrderingBillDetailBO {
     private ServletContext context;
@@ -126,5 +128,43 @@ public class OrderingBillDetailBO {
             }
         } 
         return createResult;
+	}
+
+	public ArrayList<OrderingBillDetailDTO> getOrderingBillDetails(int orderingBillId) {
+        ArrayList<OrderingBillDetailDTO> orderingBillDetails = null;
+        OrderingBillDetailMapper mapper = null;
+        try {
+            mapper = new OrderingBillDetailMapper();
+            orderingBillDetails = mapper.getOrderingBillDetails(orderingBillId);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderingBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderingBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return orderingBillDetails;
+	}
+	
+	public boolean deleteOrderingBillDetailByOrderingBillId(int id) {
+		boolean deleteResult = false;
+		OrderingBillDetailMapper mapper = null;
+        try {
+            mapper = new OrderingBillDetailMapper();
+            deleteResult = mapper.deleteOrderingBillDetailByOrderingBillId(id);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderingBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(OrderingBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return deleteResult;
 	}
 }
