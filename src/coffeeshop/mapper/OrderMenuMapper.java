@@ -130,4 +130,37 @@ public class OrderMenuMapper extends DBMapper{
 		return true;
     }
 
+	public ArrayList<OrderMenuDTO> searchOrdermenu(OrderMenuDTO orderMenuInfo) {
+		ArrayList<OrderMenuDTO> orderMenus = new ArrayList<>();    
+        Statement stmt = null;
+        try {     
+            stmt = getConnection().createStatement();
+            String sqlStr = "";
+            if (orderMenuInfo == null)
+            {
+            	 sqlStr = "SELECT * "
+            		+ " FROM caphe_java_db.ordermenu"
+            		+ " ORDER BY id ASC ";
+            }
+            else
+            {
+            	sqlStr = "SELECT * "
+            		+ " FROM caphe_java_db.ordermenu"
+            		+ " WHERE name LIKE '%" + orderMenuInfo.getName() + "%'";
+            }
+            ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
+            while (rs != null && rs.next()) {
+            	OrderMenuDTO orderMenu = new OrderMenuDTO();
+            	orderMenu.setId(rs.getInt("id"));
+            	orderMenu.setName(rs.getString("name"));
+            	orderMenu.setPrice(rs.getInt("price"));
+            	orderMenus.add(orderMenu);
+            }          
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+        
+        return orderMenus;
+	}
+
 }

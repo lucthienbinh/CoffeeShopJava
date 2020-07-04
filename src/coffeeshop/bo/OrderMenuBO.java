@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 
 import coffeeshop.dto.OrderMenuDTO;
+import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.mapper.OrderMenuMapper;
+import coffeeshop.mapper.OrderingBillMapper;
 
 public class OrderMenuBO {
 	private ServletContext context;
