@@ -134,5 +134,24 @@ public class CustomerMapper extends DBMapper {
 		     ex.printStackTrace();
 	 	} 
 		return createResult;
-	}
+    }
+    
+    public boolean updateCustomer(CustomerDTO customer) {
+		boolean updateResult = false;
+		Statement stmt = null;
+
+		try{
+			stmt = getConnection().createStatement();
+			String sqlStr = "UPDATE customers SET " 
+					+ " name = '" + customer.getName() + "',"
+                    + " email = '" + customer.getEmail() + "',"
+                    + " address = '" + customer.getAddress() + "',"
+                    + " mobilephone = '" + customer.getMobilephone() + "'"
+					+ " WHERE id = " + customer.getId(); 
+			updateResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		} 
+		return updateResult;
+   }
 }

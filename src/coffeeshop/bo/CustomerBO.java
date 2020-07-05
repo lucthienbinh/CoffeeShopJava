@@ -155,4 +155,23 @@ public class CustomerBO {
         
         return createResult;
     }
+
+    public boolean updateCustomer(CustomerDTO customer) {
+		boolean updateResult = false;
+        CustomerMapper mapper = null;
+
+        try{
+            mapper = new CustomerMapper();
+            updateResult = mapper.updateCustomer(customer);
+        }catch(Exception ex){
+            Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                mapper.closeConnection();
+            }catch(Exception ex) {
+                Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return updateResult;
+    }
 }
