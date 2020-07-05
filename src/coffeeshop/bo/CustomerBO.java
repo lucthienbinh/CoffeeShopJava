@@ -134,5 +134,25 @@ public class CustomerBO {
             }
         } 
         return deleteResult;
-	}
+    }
+    
+    public boolean createCustomer(CustomerDTO customer){
+    	boolean createResult = false;
+        CustomerMapper mapper = null;
+        
+        try{
+            mapper = new CustomerMapper();
+            createResult = mapper.createCustomer(customer);
+        }catch(Exception ex){
+            Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                mapper.closeConnection();
+            }catch(Exception ex){
+                Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        
+        return createResult;
+    }
 }

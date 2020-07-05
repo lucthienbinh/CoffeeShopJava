@@ -116,5 +116,23 @@ public class CustomerMapper extends DBMapper {
          	}
          }
 		 return true;
+    }
+    
+    public boolean createCustomer(CustomerDTO customer) {
+		boolean createResult = false;
+		Statement stmt = null;
+		 
+		try{
+			 stmt = getConnection().createStatement();
+		     String sqlStr = "INSERT INTO caphe_java_db.customers (`name`, `address`, `mobilephone`, `email`) VALUES ('"
+                     + customer.getName() + "','"
+                     + customer.getAddress() + "','"
+                     + customer.getMobilephone() + "','"
+		    		 + customer.getEmail() + "')";
+		     createResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+		}catch(SQLException ex){
+		     ex.printStackTrace();
+	 	} 
+		return createResult;
 	}
 }
