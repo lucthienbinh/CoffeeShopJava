@@ -7,7 +7,8 @@ public class OrderingBillDetailDTO {
     int orderingBillId;
     int amount;
     int price;
-    String orderMenuName;
+	String orderMenuName;
+	
 	public int getId() {
 		return id;
 	}
