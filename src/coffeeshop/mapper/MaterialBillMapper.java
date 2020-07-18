@@ -31,10 +31,10 @@ public class MaterialBillMapper extends DBMapper {
             				sqlStr += " WHERE materialbill.id = " + materialBillInfo.getId();
             			}else{
             				sqlStr += " WHERE concat(users.firstname, ' ', users.lastname) LIKE '%" + materialBillInfo.getUserName()+ "%'";
-	            			if (!materialBillInfo.getCustomerName().isEmpty()){
-	            				sqlStr += " AND materialbill.customerId != " + 0;
-	            				sqlStr += " AND customers.name LIKE '%" + materialBillInfo.getCustomerName() + "%'";
-	            			}
+	            			// if (!materialBillInfo.getCustomerName().isEmpty()){
+	            			// 	sqlStr += " AND materialbill.customerId != " + 0;
+	            			// 	sqlStr += " AND customers.name LIKE '%" + materialBillInfo.getCustomerName() + "%'";
+	            			// }
 	            			if (materialBillInfo.getTotalPrice() != 0){
 								sqlStr += " AND materialbill.totalPrice = " + materialBillInfo.getTotalPrice();
 							}
