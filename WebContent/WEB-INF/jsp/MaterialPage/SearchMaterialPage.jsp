@@ -2,8 +2,8 @@
 <%@page import="coffeeshop.dto.MaterialDTO"%>
 <%@page import="java.util.ArrayList" %>
 <jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
-<jsp:param name="pageTitle" value="Order Menu Page"/>
-<jsp:param name="pageHeading" value="Order Menu List"/>
+<jsp:param name="pageTitle" value="Material Page"/>
+<jsp:param name="pageHeading" value="Material List"/>
 </jsp:include>
 
 <style>
@@ -31,7 +31,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Search Order Menu Information</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Search Material Information</h6>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -66,7 +66,7 @@
                             <div>
                                 <button type="submit" class="btn btn-primary btn-icon-split" form="searchMaterialForm" value="Submit">
                                 <span class="icon text-white-50"><i class="fas fa-search"></i></span>
-                                <span class="text btn-text-action-list">Search Order Menu</span>
+                                <span class="text btn-text-action-list">Search Material</span>
                                 </button>
                             </div>
                             <br>
@@ -74,7 +74,7 @@
                             <div>
                                 <a href="<%=request.getContextPath()%>/GoCreateMaterialServlet" class="btn btn-success btn-icon-split">
                                     <span class="icon text-white-50"><i class="fas fa-check"></i></span>
-                                    <span class="text btn-text-action-list">Create Order Menu</span>
+                                    <span class="text btn-text-action-list">Create Material</span>
                                 </a>
                             </div>
                             <br>
@@ -82,7 +82,7 @@
                             <div>
                                 <a href="<%=request.getContextPath()%>/DeleteMaterialServlet" class="btn btn-danger btn-icon-split">
                                     <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
-                                    <span class="text btn-text-action-list">Delete Order Menu</span>
+                                    <span class="text btn-text-action-list">Delete Material</span>
                                 </a>
                             </div>
                             <br>
@@ -102,7 +102,7 @@
        <!-- DataTales Example -->
        <div class="card shadow mb-4">
             <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Order Menu List Result</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Material List Result</h6>
             </div>
 
             <div class="card-body" style="cursor:default">

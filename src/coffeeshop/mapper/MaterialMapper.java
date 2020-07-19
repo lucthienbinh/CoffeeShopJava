@@ -20,7 +20,7 @@ public class MaterialMapper extends DBMapper{
 		 
 		try{
 			 stmt = getConnection().createStatement();
-		     String sqlStr = "INSERT INTO caphe_java_db.material (`name`, `price`, `remaining`, `unit`,) VALUES ('"
+		     String sqlStr = "INSERT INTO caphe_java_db.material (`name`, `price`, `remaining`, `unit`) VALUES ('"
 					 + material.getName() + "','"
 					 + material.getPrice() + "','"
 					 + material.getRemaining() + "','"
