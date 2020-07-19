@@ -1,6 +1,7 @@
 package coffeeshop.servlets.material;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,19 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import coffeeshop.bo.UserBO;
-import coffeeshop.dto.UserDTO;
 import coffeeshop.bo.MaterialBO;
 import coffeeshop.dto.MaterialDTO;
 
 /**
- * Servlet implementation class ViewMaterialServlet
+ * Servlet implementation class SearchMaterialServlet
  */
-@WebServlet(name = "ViewMaterialServlet", urlPatterns = {"/ViewMaterialServlet"})
-public class ViewMaterialServlet extends HttpServlet {
+@WebServlet(name = "SearchMaterialServlet", urlPatterns = {"/SearchMaterialServlet"})
+public class SearchMaterialServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+	
+	private String validateString(String stringCheck){
+		if(stringCheck == null) {
+			return "";
+		}
+		return stringCheck.trim();
+    }
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+        response.setContentType("text/html");
 		// Get context for DI MaterialBO and session in request
 		HttpSession session = request.getSession(); 
 		ServletContext context =  request.getServletContext();
@@ -33,14 +40,17 @@ public class ViewMaterialServlet extends HttpServlet {
         if (userBO.authorizationUser(session, 1) == false){
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
-        }      
-        
-        MaterialDTO material = MaterialBO.getMaterial(Integer.parseInt(request.getParameter("id")));
-        request.setAttribute("material", material);
+        }  
 
+        MaterialDTO materialSearchInfo = new MaterialDTO();
+		materialSearchInfo.setName(this.validateString(request.getParameter("name")));
+    	session.setAttribute("materialSearchInfo", materialSearchInfo);
+        ArrayList<MaterialDTO> materials = MaterialBO.searchMaterial(materialSearchInfo);
+        
+        request.setAttribute("materials", materials);
         RequestDispatcher dispatcher 
-        = request.getRequestDispatcher
-        ("./WEB-INF/jsp/MaterialPage/ViewMaterialPage.jsp");
+                = request.getRequestDispatcher
+        ("./WEB-INF/jsp/MaterialPage/SearchMaterialPage.jsp");
         dispatcher.forward(request, response);
 	}
 }

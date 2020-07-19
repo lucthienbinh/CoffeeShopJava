@@ -98,9 +98,8 @@ public class MaterialMapper extends DBMapper{
 			stmt = getConnection().createStatement();
 			String sqlStr = "UPDATE material SET " 
 					+ " name = '" + material.getName() + "',"
-					// + " price = '" + material.getPrice() + "'"
-					+ " price = '" + material.getPrice() + ","
-					+ " remaining = '" + material.getRemaining() + ","
+					+ " price = '" + material.getPrice() + "',"
+					+ " remaining = '" + material.getRemaining() + "',"
 					+ " unit = '" + material.getUnit() + "'"
 					+ " WHERE id = " + material.getId(); 
 			updateResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
