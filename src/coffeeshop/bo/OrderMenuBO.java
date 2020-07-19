@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 
 import coffeeshop.dto.OrderMenuDTO;
-import coffeeshop.dto.OrderingBillDTO;
+// import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.mapper.OrderMenuMapper;
-import coffeeshop.mapper.OrderingBillMapper;
+// import coffeeshop.mapper.OrderingBillMapper;
 
 public class OrderMenuBO {
 	private ServletContext context;
@@ -70,6 +70,7 @@ public class OrderMenuBO {
                 Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         return orderMenus;
     }
 
@@ -89,6 +90,7 @@ public class OrderMenuBO {
                 Logger.getLogger(OrderMenuBO.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
+        
         return updateResult;
     }
     
