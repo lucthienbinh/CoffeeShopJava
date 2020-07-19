@@ -3,8 +3,10 @@ package coffeeshop.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import coffeeshop.dto.MaterialDTO;
+import coffeeshop.dto.UserDTO;
 
 public class MaterialMapper extends DBMapper{
 
@@ -50,4 +52,40 @@ public class MaterialMapper extends DBMapper{
 	 	 } 
 		 return updateResult;
 	}
+	 public ArrayList<MaterialDTO> searchMaterial(MaterialDTO materialInfo) {
+	        ArrayList<MaterialDTO> materials = new ArrayList<>();    
+	        Statement stmt = null;
+	        try {     
+	            stmt = getConnection().createStatement();
+	            String sqlStr = "";
+	            if (materialInfo == null)
+	            {
+	            	 sqlStr = "SELECT material.id, material.name, material.price, material.unit,"
+	            		+ " FROM caphe_java_db.material"
+	            		+ " ORDER BY material.id ASC ";
+	            }
+	            else
+	            {
+	            	sqlStr = "SELECT material.id, material.name, material.price, material.unit,"
+	            		+ " FROM caphe_java_db.material"
+	                 	+ " WHERE material.name LIKE '%" + materialInfo.getName() + "%'"
+						+ " AND material.price LIKE '%" + materialInfo.getPrice() + "%'"
+						+ " AND material.unit LIKE '%" + materialInfo.getUnit()+ "%'";
+	            	sqlStr += " ORDER BY material.id ASC ";
+	            }
+	            ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
+	            while (rs != null && rs.next()) {
+	            	MaterialDTO material = new MaterialDTO();
+	            	material.setId(rs.getInt("id"));
+	            	material.setName(rs.getString("name"));
+	            	material.setPrice(rs.getInt("price"));
+	            	material.setUnit(rs.getString("unit"));
+	            	materials.add(material);
+	            }          
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	        } 
+	        
+	        return materials;
+ }
 }

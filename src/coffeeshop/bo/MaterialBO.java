@@ -1,11 +1,13 @@
 package coffeeshop.bo;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 
 import coffeeshop.dto.MaterialDTO;
+import coffeeshop.dto.UserDTO;
 import coffeeshop.mapper.MaterialMapper;
 import coffeeshop.mapper.UserMapper;
 
@@ -52,4 +54,22 @@ public class MaterialBO {
         } 
         return updateResult;
 	}
+	public ArrayList<MaterialDTO> searchMaterial(MaterialDTO material) {
+        ArrayList<MaterialDTO> materials = null;
+        MaterialMapper mapper = null;
+        try {
+            mapper = new MaterialMapper();
+            materials = mapper.searchMaterial(material);
+        } catch (Exception ex) {
+            Logger.getLogger(MaterialBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return materials;
+    }
 }

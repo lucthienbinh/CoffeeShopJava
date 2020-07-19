@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import coffeeshop.bo.CustomerBO;
 import coffeeshop.bo.UserBO;
 import coffeeshop.dto.CustomerDTO;
-
+import coffeeshop.dto.UserDTO;
+import coffeeshop.bo.MaterialBO;
+import coffeeshop.dto.MaterialDTO;
 /**
  * Servlet implementation class GoSearchMaterialServlet
  */
@@ -25,6 +27,22 @@ public class GoSearchMaterialServlet extends HttpServlet {
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		HttpSession session = request.getSession(); 
+		ServletContext context =  request.getServletContext();
+		MaterialBO materialBO = new MaterialBO(context);
+		// Remove old search info stored in session if exists
+        MaterialDTO materialSearchInfo = (MaterialDTO) session.getAttribute("materialSearchInfo");
+		if (materialSearchInfo != null)
+        {
+			session.removeAttribute("materialSearchInfo");
+        }
+		// Set new empty search info 
+		MaterialDTO newEmptyMaterialInfo = new MaterialDTO();
+		newEmptyMaterialInfo.generateEmptyObjectForJSP();
+		session.setAttribute("userSearchInfo", newEmptyMaterialInfo);
+		// Get user info
+        ArrayList<MaterialDTO> materials =  materialBO.searchMaterial(null);
+        request.setAttribute("materials", materials);
         RequestDispatcher dispatcher 
                 = request.getRequestDispatcher
 		("./WEB-INF/jsp/MaterialPage/SearchMaterialPage.jsp");
