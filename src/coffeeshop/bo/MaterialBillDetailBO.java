@@ -6,10 +6,10 @@ import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 
-import coffeeshop.dto.OrderMenuDTO;
+import coffeeshop.dto.MaterialDTO;
 import coffeeshop.dto.MaterialBilllDTO;
 import coffeeshop.dto.MaterialBillDetailDTO;
-import coffeeshop.mapper.OrderMenuMapper;
+import coffeeshop.mapper.MaterialMapper;
 import coffeeshop.mapper.MaterialBillDetailMapper;
 import coffeeshop.mapper.MaterialBillMapper;
 
@@ -20,44 +20,43 @@ public class MaterialBillDetailBO {
         this.context = context;
     }
 	
-    public ArrayList<MaterialBillDetailDTO> updateOrderBillDetailList
-    (ArrayList<MaterialBillDetailDTO> materialBillDetailList, int orderMenuId, boolean add){
+    public ArrayList<MaterialBillDetailDTO> updateMaterialBillDetailList
+    (ArrayList<MaterialBillDetailDTO> materialBillDetailList, int materialId, boolean add){
 
-        OrderMenuMapper orderMenuMapper = null;
+        MaterialMapper materialMapper = null;
         ArrayList<MaterialBillDetailDTO> materialBillDetailNewArray = new ArrayList<MaterialBillDetailDTO>();
         MaterialBillDetailDTO materialBillDetail = new MaterialBillDetailDTO();
         
         try{
-            orderMenuMapper = new OrderMenuMapper();
+            materialMapper = new MaterialMapper();
             
-            OrderMenuDTO orderMenu = orderMenuMapper.getOrderMenu(orderMenuId);
-            materialBillDetail.setOrderMenuId(orderMenu.getId());
-            materialBillDetail.setOrderMenuName(orderMenu.getName());
+            MaterialDTO material = materialMapper.getMaterial(materialId);
+            materialBillDetail.setMaterialId(material.getId());
+            materialBillDetail.setMaterialName(material.getName());
             materialBillDetail.setQuantity(1);
-            materialBillDetail.setPrice(orderMenu.getPrice());
-            materialBillDetail.setAmount(orderMenu.getPrice());
+            materialBillDetail.setPrice(material.getPrice());
+            materialBillDetail.setAmount(material.getPrice());
             
-            if(orderMenu != null){
+            if(material != null){
                 // if materialBillDetailNewArray is empty
                 if(materialBillDetailList == null){
                     materialBillDetailNewArray.add(materialBillDetail);
                 }else{
-                    //if orderMenu is exist or not 
-                    boolean orderMenuIsExisted = false;
+                    //if material is exist or not 
+                    boolean materialIsExisted = false;
                     
                     for(int i = 0; i < materialBillDetailList.size(); i++){
-
                     	MaterialBillDetailDTO getMaterialBillDetail = materialBillDetailList.get(i);
                         
-                        if(getMaterialBillDetail.getOrderMenuId() == orderMenuId){
-                        	orderMenuIsExisted = true; 
+                        if(getMaterialBillDetail.getMaterialId() == materialId){
+                        	materialIsExisted = true; 
                         	int quantity = getMaterialBillDetail.getQuantity();
                         	if (add == true) {
                         		quantity++;
                         		getMaterialBillDetail.setQuantity(quantity);
                         	}else{
                         		if (quantity == 1){
-                        			// continue to not add orderMenu to new array ~ delete orderMenu in materialBillDetailList
+                        			// continue to not add material to new array ~ delete material in materialBillDetailList
                         			continue;
                                 }
                                 
@@ -72,8 +71,8 @@ public class MaterialBillDetailBO {
                         materialBillDetailNewArray.add(getMaterialBillDetail);
                     }
         
-                    //if orderMenu isn't exist
-                    if(orderMenuIsExisted == false){
+                    //if material isn't exist
+                    if(materialIsExisted == false){
                     	materialBillDetailNewArray.add(materialBillDetail);
                     }
                 }
@@ -81,8 +80,8 @@ public class MaterialBillDetailBO {
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            if(orderMenuMapper != null) try{
-                orderMenuMapper.closeConnection();
+            if(materialMapper != null) try{
+                materialMapper.closeConnection();
             }catch (Exception ex){
                 Logger.getLogger(MaterialBillDetailBO.class.getName()).log(Level.SEVERE, null, ex);
             }

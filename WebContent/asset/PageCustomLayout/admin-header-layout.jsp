@@ -117,7 +117,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Material Action List:</h6>
             <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchMaterialServlet">Material List</a>
-            <a class="collapse-item" href="">Create Material</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateMaterialServlet">Create Material</a>
           </div>
         </div>
       </li>
@@ -134,7 +134,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
           <i class="fas fa-cash-register"></i>
-          <span>Ordering bill</span>
+          <span>Ordering Bill</span>
         </a>
         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -154,8 +154,8 @@
         <div id="collapseSeven" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Material Bill Action List:</h6>
-            <a class="collapse-item" href="">Material Bill List</a>
-            <a class="collapse-item" href="">Create Material Bill</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchMaterialBillServlet">Material Bill List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateMaterialBillServlet">Create Material Bill</a>
           </div>
         </div>
       </li>

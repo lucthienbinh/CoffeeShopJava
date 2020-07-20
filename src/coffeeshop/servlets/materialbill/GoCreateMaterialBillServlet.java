@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import coffeeshop.bo.CustomerBO;
-import coffeeshop.bo.OrderMenuBO;
+import coffeeshop.bo.MaterialBO;
 import coffeeshop.bo.UserBO;
 import coffeeshop.dto.CustomerDTO;
-import coffeeshop.dto.OrderMenuDTO;
+import coffeeshop.dto.MaterialDTO;
 import coffeeshop.dto.MaterialBilllDTO;
 import coffeeshop.dto.UserDTO;
 
@@ -34,7 +34,7 @@ public class GoCreateMaterialBillServlet extends HttpServlet {
 		ServletContext context =  request.getServletContext();
         UserBO userBO = new UserBO(context);
         CustomerBO customerBO = new CustomerBO(context);
-        OrderMenuBO orderMenuBO = new OrderMenuBO(context);
+        MaterialBO materialBO = new MaterialBO(context);
         if (userBO.authorizationUser(session, 1) == false)
         {
         	response.sendRedirect("./GoLoginServlet");
@@ -43,9 +43,9 @@ public class GoCreateMaterialBillServlet extends HttpServlet {
         // Get customer info
         ArrayList<CustomerDTO> customers = customerBO.searchCustomer(null);
         request.setAttribute("customers", customers);
-        // Get order menu info
-        ArrayList<OrderMenuDTO> orderMenus = OrderMenuBO.searchOrderMenu(null);
-        request.setAttribute("orderMenus", orderMenus);
+        // Get material info
+        ArrayList<MaterialDTO> materials = MaterialBO.searchMaterial(null);
+        request.setAttribute("materials", materials);
         
         // Create materialBillInfo with userID is current User
         MaterialBilllDTO materialBillInfo = new MaterialBilllDTO();
@@ -56,9 +56,9 @@ public class GoCreateMaterialBillServlet extends HttpServlet {
         session.setAttribute("materialBillInfo", materialBillInfo);
         
 		RequestDispatcher dispatcher 
-		 = request.getRequestDispatcher
-	 	 ("./WEB-INF/jsp/MaterialBillPage/CreateMaterialBillPage.jsp");
-		 dispatcher.forward(request, response);
+		= request.getRequestDispatcher
+	 	("./WEB-INF/jsp/MaterialBillPage/CreateMaterialBillPage.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
