@@ -129,7 +129,7 @@
 									<td><c:out value="${material.name}" /></td>
 									<td><c:out value="${material.price}" /></td>
 									<td>
-									<a href="<%=request.getContextPath()%>/UpdateOrderingBillServlet?addMaterialId=${material.id}" class="btn btn-primary  btn-icon-split">
+									<a href="<%=request.getContextPath()%>/UpdateMaterialBillServlet?addMaterialId=${material.id}" class="btn btn-primary  btn-icon-split">
 										<span class="text">Select</span>
 									</a>
 									</td>
