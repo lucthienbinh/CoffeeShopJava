@@ -21,9 +21,8 @@ public class MaterialBillMapper extends DBMapper {
 		try{     
             stmt = getConnection().createStatement();
             String sqlStr = "";
-            sqlStr = "SELECT materialbill.customerId, materialbill.id, customers.name, users.firstname, users.lastname, materialbill.totalPrice"
+            sqlStr = "SELECT materialbill.id, users.firstname, users.lastname, materialbill.totalPrice"
             		+ " FROM caphe_java_db.materialbill "
-            		+ " LEFT JOIN caphe_java_db.customers ON materialbill.customerId = customers.id "
             		+ " LEFT JOIN caphe_java_db.users ON materialbill.userId = users.id ";
 					
 					if (materialBillInfo != null){
@@ -31,10 +30,6 @@ public class MaterialBillMapper extends DBMapper {
             				sqlStr += " WHERE materialbill.id = " + materialBillInfo.getId();
             			}else{
             				sqlStr += " WHERE concat(users.firstname, ' ', users.lastname) LIKE '%" + materialBillInfo.getUserName()+ "%'";
-	            			// if (!materialBillInfo.getCustomerName().isEmpty()){
-	            			// 	sqlStr += " AND materialbill.customerId != " + 0;
-	            			// 	sqlStr += " AND customers.name LIKE '%" + materialBillInfo.getCustomerName() + "%'";
-	            			// }
 	            			if (materialBillInfo.getTotalPrice() != 0){
 								sqlStr += " AND materialbill.totalPrice = " + materialBillInfo.getTotalPrice();
 							}
@@ -42,15 +37,10 @@ public class MaterialBillMapper extends DBMapper {
             		}
             		sqlStr += " ORDER BY materialbill.id ASC ";
             			
-            ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
+			ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
             while (rs != null && rs.next()){
             	MaterialBilllDTO materialBill = new MaterialBilllDTO();
             	materialBill.setId(rs.getInt("id"));
-            	if (rs.getInt("customerId") == 0){
-            		// materialBill.setCustomerName("None customer");
-            	}else{
-            		// materialBill.setCustomerName(rs.getString("name"));
-            	}
             	materialBill.setUserName(rs.getString("firstname")+" "+rs.getString("lastname"));
             	materialBill.setTotalPrice(rs.getInt("totalPrice"));
             	materialBills.add(materialBill);
