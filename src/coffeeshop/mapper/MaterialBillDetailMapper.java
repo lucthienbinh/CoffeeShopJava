@@ -48,7 +48,8 @@ public class MaterialBillDetailMapper extends DBMapper {
             	MaterialBillDetailDTO materialBillDetail = new MaterialBillDetailDTO();
             	materialBillDetail.setMaterialName((rs.getString("name")));
             	materialBillDetail.setQuantity(rs.getInt("quantity"));
-            	materialBillDetail.setPrice(rs.getInt("price"));
+				materialBillDetail.setPrice(rs.getInt("price"));
+				
             	int amount = rs.getInt("price") * rs.getInt("quantity");
             	materialBillDetail.setAmount(amount);
             	materialBillDetails.add(materialBillDetail);
