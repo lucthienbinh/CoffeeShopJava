@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coffeeshop.bo.MaterialBO;
 import coffeeshop.bo.UserBO;
+import coffeeshop.dto.UserDTO;
+import coffeeshop.bo.MaterialBO;
 import coffeeshop.dto.MaterialDTO;
 
 /**
@@ -24,21 +25,22 @@ public class ViewMaterialServlet extends HttpServlet {
     
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		// Get context for DI UserBO and session in request
+		// Get context for DI MaterialBO and session in request
 		HttpSession session = request.getSession(); 
 		ServletContext context =  request.getServletContext();
         UserBO userBO = new UserBO(context);
-        MaterialBO materialBO = new MaterialBO(context);
-        if (userBO.authorizationUser(session, 1) == false)
-        {
+        
+        if (userBO.authorizationUser(session, 1) == false){
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
         }      
-        MaterialDTO material = materialBO.getMaterial(request.getParameter("name"));
+        
+        MaterialDTO material = MaterialBO.getMaterial(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("material", material);
+
         RequestDispatcher dispatcher 
-    	= request.getRequestDispatcher
-    	("./WEB-INF/jsp/MaterialPage/ViewMaterialPage.jsp");
-    	dispatcher.forward(request, response);
+        = request.getRequestDispatcher
+        ("./WEB-INF/jsp/MaterialPage/ViewMaterialPage.jsp");
+        dispatcher.forward(request, response);
 	}
 }

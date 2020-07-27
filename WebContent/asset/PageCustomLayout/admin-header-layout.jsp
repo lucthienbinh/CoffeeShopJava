@@ -58,7 +58,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed nav-link-custom" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-user-friends"></i>
-          <span>Employee user</span>
+          <span>Employee User</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -73,7 +73,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
           <i class="fas fa-user-circle"></i>
-          <span>Customer user</span>
+          <span>Customer User</span>
         </a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -101,8 +101,8 @@
         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Menu Action List:</h6>
-            <a class="collapse-item" href="">Menu List</a>
-            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateOrderMenuServlet">Create Menu</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchOrderMenuServlet">Order Menu List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateOrderMenuServlet">Create Order Menu</a>
           </div>
         </div>
       </li>
@@ -117,7 +117,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Material Action List:</h6>
             <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchMaterialServlet">Material List</a>
-            <a class="collapse-item" href="">Create Material</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateMaterialServlet">Create Material</a>
           </div>
         </div>
       </li>
@@ -134,13 +134,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
           <i class="fas fa-cash-register"></i>
-          <span>Ordering bill</span>
+          <span>Ordering Bill</span>
         </a>
         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Ordering Bill Action List:</h6>
-            <a class="collapse-item" href="">Ordering Bill List</a>
-            <a class="collapse-item" href="">Create Ordering Bill</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchOrderingBillServlet">Ordering Bill List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateOrderingBillServlet">Create Ordering Bill</a>
           </div>
         </div>
       </li>
@@ -154,39 +154,12 @@
         <div id="collapseSeven" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Material Bill Action List:</h6>
-            <a class="collapse-item" href="">Material Bill List</a>
-            <a class="collapse-item" href="">Create Material Bill</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchMaterialBillServlet">Material Bill List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateMaterialBillServlet">Create Material Bill</a>
           </div>
         </div>
       </li>
       
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Report Service
-      </div>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Report By Shift</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-chart-bar"></i>
-          <span>Report By Day</span></a>
-      </li>
-      
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-chart-line"></i>
-          <span>Report By Month</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -210,18 +183,6 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -314,7 +275,7 @@
                   </div>
                   <div class="font-weight-bold">
                     <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    <div class="small text-gray-500">Emily Fowler ï¿½ 58m</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -324,7 +285,7 @@
                   </div>
                   <div>
                     <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                    <div class="small text-gray-500">Jae Chun ï¿½ 1d</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -334,7 +295,7 @@
                   </div>
                   <div>
                     <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    <div class="small text-gray-500">Morgan Alvarez ï¿½ 2d</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -344,7 +305,7 @@
                   </div>
                   <div>
                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                    <div class="small text-gray-500">Chicken the Dog ï¿½ 2w</div>
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>

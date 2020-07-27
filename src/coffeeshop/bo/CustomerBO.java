@@ -54,6 +54,24 @@ public class CustomerBO {
         }        
         return customer;
     }
+    
+    public CustomerDTO getCustomerById(int id) {
+    	CustomerDTO customer = null;
+    	CustomerMapper mapper = null;
+        try {
+        	mapper = new CustomerMapper();
+        	customer = mapper.getCustomerById(id);
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                mapper.closeConnection();
+            } catch (Exception ex) {
+                Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }        
+        return customer;
+    }
 	
 	public ArrayList<CustomerDTO> updateCustomerDeleteList(ArrayList<CustomerDTO> customerDeleteList,
 			String currentEmail) {
@@ -116,5 +134,44 @@ public class CustomerBO {
             }
         } 
         return deleteResult;
-	}
+    }
+    
+    public boolean createCustomer(CustomerDTO customer){
+    	boolean createResult = false;
+        CustomerMapper mapper = null;
+        
+        try{
+            mapper = new CustomerMapper();
+            createResult = mapper.createCustomer(customer);
+        }catch(Exception ex){
+            Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                mapper.closeConnection();
+            }catch(Exception ex){
+                Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        
+        return createResult;
+    }
+
+    public boolean updateCustomer(CustomerDTO customer) {
+		boolean updateResult = false;
+        CustomerMapper mapper = null;
+
+        try{
+            mapper = new CustomerMapper();
+            updateResult = mapper.updateCustomer(customer);
+        }catch(Exception ex){
+            Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try{
+                mapper.closeConnection();
+            }catch(Exception ex) {
+                Logger.getLogger(CustomerBO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return updateResult;
+    }
 }

@@ -3,7 +3,8 @@ package coffeeshop.dto;
 public class MaterialBilllDTO {
 	int id;
     int userId;
-    int totalPrice;
+	int totalPrice;
+	String userName;
 	public int getId() {
 		return id;
 	}
@@ -28,12 +29,19 @@ public class MaterialBilllDTO {
 		this.userId = userId;
 		this.totalPrice = totalPrice;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public MaterialBilllDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public void generateEmptyObjectForJSP() {
 		this.userId = 0;
+		this.userName = "";
 		this.totalPrice = 0;
 	}
 }

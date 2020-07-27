@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import coffeeshop.bo.MaterialBO;
 import coffeeshop.bo.UserBO;
+import coffeeshop.bo.MaterialBO;
 import coffeeshop.dto.MaterialDTO;
-import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class UpdateMaterialServlet
@@ -22,58 +21,48 @@ import coffeeshop.dto.UserDTO;
 @WebServlet(name = "UpdateMaterialServlet", urlPatterns = {"/UpdateMaterialServlet"})
 public class UpdateMaterialServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private String validateString(String stringCheck)
-	{
-		if(stringCheck == null) 
-		{
+       
+	private String validateString(String stringCheck){
+		if(stringCheck == null) {
 			return "";
 		}
 		return stringCheck.trim();
-	}
-	
-	private int validateInteger(String integerCheck)
-	{
-		if(integerCheck == null) 
-		{
-			return 0;
-		}
-		return Integer.parseInt(integerCheck);
-	}
+    }
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		// Get context for DI UserBO and session in request
+		// Get context for DI MaterialBO and session in request
 		HttpSession session = request.getSession(); 
 		ServletContext context =  request.getServletContext();
         UserBO userBO = new UserBO(context);
-        MaterialBO materialBO = new MaterialBO(context);
         if (userBO.authorizationUser(session, 1) == false)
         {
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
         }        
         MaterialDTO material = new MaterialDTO();
-        boolean updateResult = false;
-        material.setId(this.validateInteger(request.getParameter("id")));
-        material.setName(this.validateString(request.getParameter("name")));
-        material.setPrice(this.validateInteger(request.getParameter("price")));
-        material.setRemaining(this.validateInteger(request.getParameter("remaining")));
-        material.setUnit(this.validateString(request.getParameter("unit")));
-		
-		updateResult = materialBO.updateMaterial(material);
+		boolean updateResult = false;
+
+        material.setId(Integer.parseInt(this.validateString(request.getParameter("id"))));
+		material.setName(this.validateString(request.getParameter("name")));
+		material.setPrice(Integer.parseInt(this.validateString(request.getParameter("price"))));
+		material.setRemaining(Integer.parseInt(this.validateString(request.getParameter("remaining"))));
+		material.setUnit(this.validateString(request.getParameter("unit")));
+
+		updateResult = MaterialBO.updateMaterial(material);
 		String updateMessage = "Your information has been updated!";
-		if (updateResult == false)
-		{
+		if (updateResult == false){
 			updateMessage = "Server error. Please try again later";
-		}
-		material = materialBO.getMaterial(request.getParameter("name"));
+        }
+        
+		material = MaterialBO.getMaterial(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("material", material);
         request.setAttribute("updateResult", updateResult);
         request.setAttribute("updateMessage", updateMessage);
-        RequestDispatcher dispatcher = request.getRequestDispatcher
-		("./WEB-INF/jsp/MaterialPage/ViewMaterialPage.jsp");
+        RequestDispatcher dispatcher 
+        = request.getRequestDispatcher("./WEB-INF/jsp/MaterialPage/ViewMaterialPage.jsp");
     	dispatcher.forward(request, response);
 	}
+
 
 }

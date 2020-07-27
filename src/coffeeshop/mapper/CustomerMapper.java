@@ -50,7 +50,7 @@ public class CustomerMapper extends DBMapper {
         } 
         
         return customers;
-}
+	}
 
 	public CustomerDTO getCustomer(String email) {
 		CustomerDTO user = new CustomerDTO();
@@ -58,6 +58,27 @@ public class CustomerMapper extends DBMapper {
         try {
             stmt = getConnection().createStatement();
             String sqlStr = "SELECT * FROM caphe_java_db.customers WHERE email = '" + email + "'";
+            ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
+            if (rs != null && rs.next()) {
+            	user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setAddress(rs.getString("address"));
+                user.setEmail(rs.getString("email"));
+                user.setMobilephone(rs.getString("mobilephone"));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+        return user;
+	}
+	
+	public CustomerDTO getCustomerById(int id) {
+		CustomerDTO user = new CustomerDTO();
+        Statement stmt = null;
+        try {
+            stmt = getConnection().createStatement();
+            String sqlStr = "SELECT * FROM caphe_java_db.customers WHERE id = " + id;
             ResultSet rs = stmt.executeQuery(sqlStr); // Send the query to the server
             if (rs != null && rs.next()) {
             	user.setId(rs.getInt("id"));
@@ -95,5 +116,42 @@ public class CustomerMapper extends DBMapper {
          	}
          }
 		 return true;
-	}
+    }
+    
+    public boolean createCustomer(CustomerDTO customer) {
+		boolean createResult = false;
+		Statement stmt = null;
+		 
+		try{
+			 stmt = getConnection().createStatement();
+		     String sqlStr = "INSERT INTO caphe_java_db.customers (`name`, `address`, `mobilephone`, `email`) VALUES ('"
+                     + customer.getName() + "','"
+                     + customer.getAddress() + "','"
+                     + customer.getMobilephone() + "','"
+		    		 + customer.getEmail() + "')";
+		     createResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+		}catch(SQLException ex){
+		     ex.printStackTrace();
+	 	} 
+		return createResult;
+    }
+    
+    public boolean updateCustomer(CustomerDTO customer) {
+		boolean updateResult = false;
+		Statement stmt = null;
+
+		try{
+			stmt = getConnection().createStatement();
+			String sqlStr = "UPDATE customers SET " 
+					+ " name = '" + customer.getName() + "',"
+                    + " email = '" + customer.getEmail() + "',"
+                    + " address = '" + customer.getAddress() + "',"
+                    + " mobilephone = '" + customer.getMobilephone() + "'"
+					+ " WHERE id = " + customer.getId(); 
+			updateResult = stmt.executeUpdate(sqlStr) > 0; // Send the query to the server
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		} 
+		return updateResult;
+   }
 }
