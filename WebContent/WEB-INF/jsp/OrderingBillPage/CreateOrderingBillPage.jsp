@@ -123,7 +123,7 @@
 	                 <tr>
 	                   <th>ID</th>
 	                   <th>Customer name</th>
-	                   <th>Mobile-phone</th>
+	                   <th>Mobile phone</th>
 	                   <th>Select</th>
 	                 </tr>
 	               </thead>

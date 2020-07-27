@@ -37,12 +37,12 @@
 	    		<div class="row">
 	    			<div class="col-md-6">
 	    				<h4 class="small font-weight-bold">Password</h4>
-	    				<input type="text" class="form-control bg-light border-0 small" placeholder="Input Password" 
+	    				<input type="password" class="form-control bg-light border-0 small" placeholder="Input Password" 
 	    				name="password" required="required" aria-describedby="basic-addon2" id="new_password">
 	    			</div>
 	    			<div class="col-md-6">
 	    				<h4 class="small font-weight-bold">Confirm Password</h4>
-	    				<input type="text" class="form-control bg-light border-0 small" placeholder="Confirm Password" 
+	    				<input type="password" class="form-control bg-light border-0 small" placeholder="Confirm Password" 
 	    				name="password" required="required" aria-describedby="basic-addon2" id="confirm_password" oninput="checkConfirmPassword(this)">
 	    			</div>
 	    		</div>

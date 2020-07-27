@@ -146,7 +146,7 @@
                    <th>Last name</th>
                    <th>Sex</th>
                    <th>Address</th>
-                   <th>Mobile-phone</th>
+                   <th>Mobile phone</th>
                    <th>Role name</th>
                    <th>Select</th>
                  </tr>

@@ -3,8 +3,8 @@
 <%@page import="coffeeshop.dto.MaterialBilllDTO"%>
 <%@page import="java.util.ArrayList" %>
 <jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
-<jsp:param name="pageTitle" value="Create Material Page"/>
-<jsp:param name="pageHeading" value="Create Material"/>
+<jsp:param name="pageTitle" value="Create Material Bill Page"/>
+<jsp:param name="pageHeading" value="Create Material Bill"/>
 </jsp:include>
 
 <!-- ###################### START TO INPUT YOUR CODE FROM HERE ###################### -->

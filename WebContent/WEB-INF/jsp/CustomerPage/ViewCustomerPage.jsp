@@ -51,7 +51,7 @@
 							<div class="row">
 								<div class="col-md-12">
 								<h4 class="small font-weight-bold">Email</h4>
-									<input type="text" class="form-control bg-light border-0 small" placeholder="Input Email" 
+									<input type="email" class="form-control bg-light border-0 small" placeholder="Input Email" 
 									name="email" aria-describedby="basic-addon2" value="${customer.getEmail()}">
 								</div>
 							</div>
@@ -68,8 +68,8 @@
                             
                             <div class="row">
 								<div class="col-md-12">
-								<h4 class="small font-weight-bold">Mobilephone</h4>
-									<input type="text" class="form-control bg-light border-0 small" placeholder="Input Mobilephone" 
+								<h4 class="small font-weight-bold">Mobile phone</h4>
+									<input type="number" class="form-control bg-light border-0 small" placeholder="Input Mobile phone" 
 									name="mobilephone" aria-describedby="basic-addon2" value="${customer.getMobilephone()}">
 								</div>
 							</div>

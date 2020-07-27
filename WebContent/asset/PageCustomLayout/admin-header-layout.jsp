@@ -58,7 +58,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed nav-link-custom" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-user-friends"></i>
-          <span>Employee user</span>
+          <span>Employee User</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -73,7 +73,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
           <i class="fas fa-user-circle"></i>
-          <span>Customer user</span>
+          <span>Customer User</span>
         </a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -101,8 +101,8 @@
         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Menu Action List:</h6>
-            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchOrderMenuServlet">Menu List</a>
-            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateOrderMenuServlet">Create Menu</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoSearchOrderMenuServlet">Order Menu List</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/GoCreateOrderMenuServlet">Create Order Menu</a>
           </div>
         </div>
       </li>
