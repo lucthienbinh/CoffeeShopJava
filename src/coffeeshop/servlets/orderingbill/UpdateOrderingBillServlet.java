@@ -20,6 +20,7 @@ import coffeeshop.dto.CustomerDTO;
 import coffeeshop.dto.OrderMenuDTO;
 import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.dto.OrderingBillDetailDTO;
+import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class UpdateOrderingBillServlet
@@ -50,11 +51,18 @@ public class UpdateOrderingBillServlet extends HttpServlet {
         UserBO userBO = new UserBO(context);
         OrderingBillDetailBO orderingBillDetailBO = new OrderingBillDetailBO(context);
         CustomerBO customerBO = new CustomerBO(context);
-        if (userBO.authorizationUser(session, 1) == false)
+        if (userBO.authorizationUser(session, 2) == false)
         {
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
         }
+        // Authorization User with role
+        UserDTO user = userBO.getAuthorizationUser(session);
+        if (user.getGroupid() == 1)
+        	request.setAttribute("isAdmin", true);
+        else
+        	request.setAttribute("isAdmin", false);
+        
         OrderingBillDTO orderingBillInfo = (OrderingBillDTO) session.getAttribute("orderingBillInfo");
         session.removeAttribute("orderingBillInfo");
         // Update orderingBillDetail list

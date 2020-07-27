@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import coffeeshop.bo.OrderingBillBO;
 import coffeeshop.bo.UserBO;
 import coffeeshop.dto.OrderingBillDTO;
+import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class GoSearchOrderingBillServlet
@@ -30,11 +31,18 @@ public class GoSearchOrderingBillServlet extends HttpServlet {
 		ServletContext context =  request.getServletContext();
 		UserBO userBO = new UserBO(context);
         OrderingBillBO orderingBillBO = new OrderingBillBO(context);
-        if (userBO.authorizationUser(session, 1) == false)
+        if (userBO.authorizationUser(session, 2) == false)
         {
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
-        }    
+        }
+        // Authorization User with role
+        UserDTO user = userBO.getAuthorizationUser(session);
+        if (user.getGroupid() == 1)
+        	request.setAttribute("isAdmin", true);
+        else
+        	request.setAttribute("isAdmin", false);
+        
 		// Remove old search info stored in session if exists
         OrderingBillDTO orderingBillSearchInfo = (OrderingBillDTO) session.getAttribute("orderingBillSearchInfo");
 		if (orderingBillSearchInfo != null)

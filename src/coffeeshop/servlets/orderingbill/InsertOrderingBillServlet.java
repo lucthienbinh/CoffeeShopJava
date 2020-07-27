@@ -21,6 +21,7 @@ import coffeeshop.dto.CustomerDTO;
 import coffeeshop.dto.OrderMenuDTO;
 import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.dto.OrderingBillDetailDTO;
+import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class InsertOrderingBillServlet
@@ -38,10 +39,17 @@ public class InsertOrderingBillServlet extends HttpServlet {
         CustomerBO customerBO = new CustomerBO(context);
         OrderingBillBO orderingBillBO = new OrderingBillBO(context);
         OrderingBillDetailBO orderingBillDetailBO = new OrderingBillDetailBO(context);
-		if (userBO.authorizationUser(session, 1) == false){
+		if (userBO.authorizationUser(session, 2) == false){
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
 		}
+        // Authorization User with role
+        UserDTO user = userBO.getAuthorizationUser(session);
+        if (user.getGroupid() == 1)
+        	request.setAttribute("isAdmin", true);
+        else
+        	request.setAttribute("isAdmin", false);
+		
 		boolean createResult = false;
 		String createMessage = "Server error. Please try again later";
 		// Get info from session then remove it

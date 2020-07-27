@@ -1,10 +1,18 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@page import="coffeeshop.dto.OrderingBillDTO"%>
 <%@page import="java.util.ArrayList" %>
-<jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
-<jsp:param name="pageTitle" value="Ordering Bill Page"/>
-<jsp:param name="pageHeading" value="Ordering Bill List"/>
-</jsp:include>
+<c:if test="${isAdmin == true}">
+	<jsp:include page="/asset/PageCustomLayout/admin-header-layout.jsp">
+	<jsp:param name="pageTitle" value="Ordering Bill Page"/>
+	<jsp:param name="pageHeading" value="Ordering Bill List"/>
+	</jsp:include>
+</c:if>
+<c:if test="${isAdmin == false}">
+	<jsp:include page="/asset/PageCustomLayout/user-header-layout.jsp">
+	<jsp:param name="pageTitle" value="Ordering Bill Page"/>
+	<jsp:param name="pageHeading" value="Ordering Bill List"/>
+	</jsp:include>
+</c:if>
         
 <!-- ###################### START TO INPUT YOUR CODE FROM HERE ###################### -->
 <!-- Begin Page Content -->
