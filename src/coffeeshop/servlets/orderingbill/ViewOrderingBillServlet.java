@@ -17,6 +17,7 @@ import coffeeshop.bo.OrderingBillDetailBO;
 import coffeeshop.bo.UserBO;
 import coffeeshop.dto.OrderingBillDTO;
 import coffeeshop.dto.OrderingBillDetailDTO;
+import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class ViewOrderingBillServlet
@@ -40,10 +41,17 @@ public class ViewOrderingBillServlet extends HttpServlet {
         UserBO userBO = new UserBO(context);
         OrderingBillBO orderingBillBO = new OrderingBillBO(context);
         OrderingBillDetailBO orderingBillDetailBO = new OrderingBillDetailBO(context);
-        if (userBO.authorizationUser(session, 1) == false){
+        if (userBO.authorizationUser(session, 2) == false){
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
         }      
+        // Authorization User with role
+        UserDTO user = userBO.getAuthorizationUser(session);
+        if (user.getGroupid() == 1)
+        	request.setAttribute("isAdmin", true);
+        else
+        	request.setAttribute("isAdmin", false);
+        
         OrderingBillDTO orderingBill = orderingBillBO.getOrderingBill(this.validateInteger(request.getParameter("id")));
         request.setAttribute("orderingBill", orderingBill);
         ArrayList<OrderingBillDetailDTO> orderingBillDetailList = orderingBillDetailBO.getOrderingBillDetails(orderingBill.getId());

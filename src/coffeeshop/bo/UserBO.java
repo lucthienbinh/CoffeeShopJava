@@ -205,7 +205,7 @@ public class UserBO {
         return updateResult;
 	}
 	
-	public boolean authorizationUser(HttpSession session, int roleRequire) {
+	public boolean authorizationUser(HttpSession session, int maxRoleAllow) {
 		if (session.isNew() || session.getAttribute("email") == null) {
 			return false;
 		} else {
@@ -214,7 +214,7 @@ public class UserBO {
 			if (user == null) {
 				return false;
 			} else {
-				if(user.getGroupid() == roleRequire) {
+				if(user.getGroupid() <= maxRoleAllow) {
 					return true;
 				} else {
 					return false;

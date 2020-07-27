@@ -35,11 +35,18 @@ public class GoCreateOrderingBillServlet extends HttpServlet {
         UserBO userBO = new UserBO(context);
         CustomerBO customerBO = new CustomerBO(context);
         OrderMenuBO orderMenuBO = new OrderMenuBO(context);
-        if (userBO.authorizationUser(session, 1) == false)
+        if (userBO.authorizationUser(session, 2) == false)
         {
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
         }    
+        // Authorization User with role
+        UserDTO user = userBO.getAuthorizationUser(session);
+        if (user.getGroupid() == 1)
+        	request.setAttribute("isAdmin", true);
+        else
+        	request.setAttribute("isAdmin", false);
+        
         // Get customer info
         ArrayList<CustomerDTO> customers = customerBO.searchCustomer(null);
         request.setAttribute("customers", customers);
@@ -49,7 +56,6 @@ public class GoCreateOrderingBillServlet extends HttpServlet {
         
         // Create orderingBillInfo with userID is current User
         OrderingBillDTO orderingBillInfo = new OrderingBillDTO();
-        UserDTO user = userBO.getAuthorizationUser(session);
         orderingBillInfo.setUserId(user.getId());
         orderingBillInfo.setUserName(user.getFirstname()+" "+user.getLastname());
         orderingBillInfo.setTotalPrice(0);

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import coffeeshop.bo.OrderingBillBO;
 import coffeeshop.bo.UserBO;
 import coffeeshop.dto.OrderingBillDTO;
+import coffeeshop.dto.UserDTO;
 
 /**
  * Servlet implementation class UpdateOrderingBillDeleteList
@@ -37,10 +38,16 @@ public class UpdateOrderingBillDeleteList extends HttpServlet {
 		ServletContext context =  request.getServletContext();
         UserBO userBO = new UserBO(context);
         OrderingBillBO orderingBillBO = new OrderingBillBO(context);
-        if (userBO.authorizationUser(session, 1) == false){
+        if (userBO.authorizationUser(session, 2) == false){
         	response.sendRedirect("./GoLoginServlet");
 	    	return;
 		}
+        // Authorization User with role
+        UserDTO user = userBO.getAuthorizationUser(session);
+        if (user.getGroupid() == 1)
+        	request.setAttribute("isAdmin", true);
+        else
+        	request.setAttribute("isAdmin", false);
 		             
 		int currentId = Integer.parseInt(this.validateString(request.getParameter("id")));
         // Update OrderMenu delete list
