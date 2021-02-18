@@ -7,7 +7,7 @@
 - Xampp Server for MySQL
 - Eclipse IDE for Java EE Developers
 - Tomcat Server 9.0.35
-- Last thing is your time :relaxed:!
+- The last thing is your time :relaxed:!
 
 ## Skills This Project Require:
 - Java Basic (Datatype, Class, OOP .....)
