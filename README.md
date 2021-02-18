@@ -1,13 +1,13 @@
 # Coffee Shop Java2EE
-- This project is written base on a Laravel project: [Hieu Phan Github](https://github.com/hieuphanuit/Quan_Ly_Quan_Cafe).
-- If you find any issues when coding please contactme.
+- This project was written base on a Laravel project of: [Hieu Phan Github](https://github.com/hieuphanuit/Quan_Ly_Quan_Cafe).
+- If you find any issue when coding please contact me.
 
 ## Project Requirements:
-- JDK 1.8 (Java 8)
-- Xampp Server (MySQL)
+- Java 8
+- Xampp Server for MySQL
 - Eclipse IDE for Java EE Developers
-- Tomcat Server (9.0.35)
-- Your time :relaxed:
+- Tomcat Server 9.0.35
+- Last thing is your time :relaxed:!
 
 ## Skills This Project Require:
 - Java Basic (Datatype, Class, OOP .....)
