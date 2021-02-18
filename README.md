@@ -15,10 +15,11 @@
 - HTML + CSS + Javascript (+ Bootstrap)
 - MVC model
 - Web technology (HTTP Request, HTTP Response, Session ....)
-- JSP Technology
-- Servlet Technology
-- EJB Technology
-- 
+- JavaEE technology
+  - JSP Technology
+  - Servlet Technology
+  - EJB Technology
+
 ## How to run the project:
 1. Import file caphe_java_db.sql after created database named caphe_java_db
 2. Import project folder to your Eclipse workspace
